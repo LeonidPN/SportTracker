@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SportTracker</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_health">Здоровье</string>
+    <string name="title_exercise">Упражнения</string>
+    <string name="title_me">Я</string>
+    <string name="empty"></string>
 </resources>

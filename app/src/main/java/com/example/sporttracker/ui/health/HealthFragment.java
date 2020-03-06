@@ -1,4 +1,4 @@
-package com.example.sporttracker.ui.dashboard;
+package com.example.sporttracker.ui.health;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.sporttracker.R;
 
-public class DashboardFragment extends Fragment {
+public class HealthFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private HealthViewModel healthViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(this, new Observer<String>() {
+        healthViewModel =
+                ViewModelProviders.of(this).get(HealthViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_health, container, false);
+        final TextView textView = root.findViewById(R.id.text_health);
+        healthViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
