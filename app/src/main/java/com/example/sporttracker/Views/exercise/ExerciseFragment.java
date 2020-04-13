@@ -1,4 +1,4 @@
-package com.example.sporttracker.ui.exercise;
+package com.example.sporttracker.Views.exercise;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -34,7 +34,7 @@ public class ExerciseFragment extends Fragment {
         });
 
         final Spinner spinner = root.findViewById(R.id.spinner);
-        String[] cities = {"Бег", ""};
+        String[] cities = {"Бег", "Велосипед", "Ходьба"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(root.getContext(), android.R.layout.simple_spinner_item, cities);
         // Определяем разметку для использования при выборе элемента
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

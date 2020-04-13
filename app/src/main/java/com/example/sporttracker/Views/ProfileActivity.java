@@ -1,10 +1,12 @@
-package com.example.sporttracker;
+package com.example.sporttracker.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Profile extends AppCompatActivity {
+import com.example.sporttracker.R;
+
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

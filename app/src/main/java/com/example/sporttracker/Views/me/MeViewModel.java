@@ -1,16 +1,16 @@
-package com.example.sporttracker.ui.exercise;
+package com.example.sporttracker.Views.me;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ExerciseViewModel extends ViewModel {
+public class MeViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ExerciseViewModel() {
+    public MeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Упражнения");
+        mText.setValue("This is notifications fragment");
     }
 
     public LiveData<String> getText() {

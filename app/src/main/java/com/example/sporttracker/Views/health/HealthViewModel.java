@@ -1,4 +1,4 @@
-package com.example.sporttracker.ui.health;
+package com.example.sporttracker.Views.health;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,8 +1,9 @@
-package com.example.sporttracker;
+package com.example.sporttracker.Views;
 
 import android.os.Bundle;
 import android.view.Window;
 
+import com.example.sporttracker.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;

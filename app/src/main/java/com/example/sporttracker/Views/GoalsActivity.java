@@ -1,14 +1,16 @@
-package com.example.sporttracker;
+package com.example.sporttracker.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class AddExerciseRecord extends AppCompatActivity {
+import com.example.sporttracker.R;
+
+public class GoalsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_exercise_record);
+        setContentView(R.layout.activity_goals);
     }
 }
