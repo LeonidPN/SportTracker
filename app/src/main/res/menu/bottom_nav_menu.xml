@@ -9,7 +9,7 @@
     <item
         android:id="@+id/navigation_exercise"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_exercise" />
+        android:title="@string/title_exercises" />
 
     <item
         android:id="@+id/navigation_me"

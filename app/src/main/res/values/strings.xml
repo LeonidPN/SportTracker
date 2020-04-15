@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">SportTracker</string>
     <string name="title_health">Здоровье</string>
-    <string name="title_exercise">Упражнения</string>
+    <string name="title_exercises">Упражнения</string>
     <string name="title_me">Я</string>
     <string name="empty"></string>
+    <string name="exercises">Упражнение</string>
+    <string name="date">Дата</string>
+    <string name="comment">Комментарий</string>
+    <string name="distance">Дистанция</string>
+    <string name="time">Продолжительность</string>
+    <string name="title_add_exercise_record">Добавление записи</string>
 </resources>

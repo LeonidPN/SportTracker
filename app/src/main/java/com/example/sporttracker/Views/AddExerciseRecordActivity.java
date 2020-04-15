@@ -6,8 +6,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,22 +19,24 @@ import com.example.sporttracker.Presenters.AddExerciseRecordPresenter;
 import com.example.sporttracker.R;
 import com.example.sporttracker.Services.ActivityRecordRepository;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddExerciseRecordActivity extends AppCompatActivity {
 
     AddExerciseRecordPresenter presenter;
 
-    private Spinner spinner;
-    private TextView textViewCount;
+    private Spinner spinnerExercise;
     private TextView textViewDate;
+    private TextView textViewDistance;
+    private TextView textViewTime;
     private TextView textViewComment;
 
-    private Button buttonSave;
-    private Button buttonCancel;
+    private ImageButton buttonSave;
+    private ImageButton buttonCancel;
 
-    private Calendar dateAndTime;
+    private Calendar date;
+    private Calendar time;
+    private String exercise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +50,19 @@ public class AddExerciseRecordActivity extends AppCompatActivity {
         presenter.attachView(this);
         presenter.viewIsReady();
 
-        spinner = findViewById(R.id.spinner);
-        textViewCount = findViewById(R.id.textViewCount);
-        textViewDate = findViewById(R.id.textViewDate);
-        textViewComment = findViewById(R.id.textViewComment);
+        spinnerExercise = findViewById(R.id.spinner_exercise);
+        textViewDistance = findViewById(R.id.text_distance);
+        textViewDate = findViewById(R.id.text_date);
+        textViewTime = findViewById(R.id.text_time);
+        textViewComment = findViewById(R.id.text_comment);
 
-        buttonSave = findViewById(R.id.buttonSave);
-        buttonCancel = findViewById(R.id.buttonCancel);
+        buttonSave = findViewById(R.id.imageButtonSave);
+        buttonCancel = findViewById(R.id.imageButtonCancel);
 
-        textViewCount.setOnClickListener(new View.OnClickListener() {
+        textViewDistance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.changeCount();
+                presenter.changeDistance();
             }
         });
 
@@ -66,6 +70,13 @@ public class AddExerciseRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 presenter.setDate();
+            }
+        });
+
+        textViewTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.changeDuration();
             }
         });
 
@@ -80,7 +91,6 @@ public class AddExerciseRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 presenter.save();
-                finish();
             }
         });
 
@@ -92,8 +102,8 @@ public class AddExerciseRecordActivity extends AppCompatActivity {
         });
     }
 
-    public void showToast(int resId) {
-        Toast.makeText(this, resId, Toast.LENGTH_SHORT).show();
+    public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     public void updateActivityList(Activities[] activities) {
@@ -101,35 +111,73 @@ public class AddExerciseRecordActivity extends AppCompatActivity {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = activities[i].getName();
         }
-        final Spinner spinner = findViewById(R.id.spinner);
+        final Spinner spinner = findViewById(R.id.spinner_exercise);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arr);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                exercise = (String) parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinner.setSelection(0);
     }
 
     public Context getContext() {
         return this;
     }
 
-    public void setTextViewCount(String text) {
-        textViewCount.setText(text + " м");
+    public void setTextViewDistance(String text) {
+        textViewDistance.setText(text + " м");
     }
 
     public void setTextViewComment(String text) {
         textViewComment.setText(text);
     }
 
-    public void setInitialDateTime(Calendar dateAndTime) {
-        this.dateAndTime = dateAndTime;
+    public void setInitialDate(Calendar dateAndTime) {
+        this.date = dateAndTime;
+    }
+
+    public void updateDate(Calendar dateAndTime) {
+        this.date = dateAndTime;
         textViewDate.setText(DateUtils.formatDateTime(this,
                 dateAndTime.getTimeInMillis(),
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
     }
 
+    public void setInitialTime(Calendar dateAndTime) {
+        this.time = dateAndTime;
+    }
+
+    public void updateTime(Calendar dateAndTime) {
+        this.time = dateAndTime;
+        textViewTime.setText(DateUtils.formatDateTime(this,
+                dateAndTime.getTimeInMillis(),
+                DateUtils.FORMAT_SHOW_TIME));
+    }
+
     public ActivityRecordModel getModel() {
         ActivityRecordModel model = new ActivityRecordModel();
-        //model.setCount(Float.parseFloat(textViewCount.getText().toString().substring(0, textViewCount.getText().toString().length() - 2)));
-        model.setDate(dateAndTime.getTime());
+        model.setActivity(exercise);
+        if (textViewDistance.getText().toString().isEmpty() || textViewDistance.getText().toString() == null) {
+            model.setDistance(-1);
+        } else {
+            model.setDistance(Float.parseFloat(textViewDistance.getText().toString()
+                    .substring(0, textViewDistance.getText().toString().length() - 2)));
+        }
+        if(date != null) {
+            model.setDate(date.getTime());
+        }
+        if(time != null) {
+            model.setTime(time.getTimeInMillis() / 1000);
+        }
         model.setComment(textViewComment.getText().toString());
         return model;
     }

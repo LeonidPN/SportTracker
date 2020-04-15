@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + Tables.ActivityRecordTable.NAME
                 + " ("
                 + Tables.ActivityRecordTable.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + Tables.ActivityRecordTable.COLUMN_DATE + " TEXT, "
+                + Tables.ActivityRecordTable.COLUMN_DATE + " TEXT,"
                 + Tables.ActivityRecordTable.COLUMN_TIME + " INTEGER,"
                 + Tables.ActivityRecordTable.COLUMN_DISTANCE + " REAL,"
                 + Tables.ActivityRecordTable.COLUMN_COMMENT + " TEXT,"

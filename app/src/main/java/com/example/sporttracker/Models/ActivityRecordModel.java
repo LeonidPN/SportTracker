@@ -8,7 +8,7 @@ public class ActivityRecordModel {
 
     private Date date;
 
-    private int time;
+    private long time;
 
     private float distance;
 
@@ -32,11 +32,11 @@ public class ActivityRecordModel {
         this.date = date;
     }
 
-    public int getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(long time) {
         this.time = time;
     }
 

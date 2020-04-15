@@ -25,7 +25,7 @@ public class ExerciseFragment extends Fragment {
         exerciseViewModel =
                 ViewModelProviders.of(this).get(ExerciseViewModel.class);
         View root = inflater.inflate(R.layout.fragment_exercise, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
+        final TextView textView = root.findViewById(R.id.text_title);
         exerciseViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -33,7 +33,7 @@ public class ExerciseFragment extends Fragment {
             }
         });
 
-        final Spinner spinner = root.findViewById(R.id.spinner);
+        final Spinner spinner = root.findViewById(R.id.spinner_exercise);
         String[] cities = {"Бег", "Велосипед", "Ходьба"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(root.getContext(), android.R.layout.simple_spinner_item, cities);
         // Определяем разметку для использования при выборе элемента

@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/navigation_exercise"
         android:name="com.example.sporttracker.Views.exercise.ExerciseFragment"
-        android:label="@string/title_exercise"
+        android:label="@string/title_exercises"
         tools:layout="@layout/fragment_exercise" />
 
     <fragment
