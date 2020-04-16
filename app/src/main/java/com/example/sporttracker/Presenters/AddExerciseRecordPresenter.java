@@ -1,5 +1,6 @@
 package com.example.sporttracker.Presenters;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -49,7 +50,7 @@ public class AddExerciseRecordPresenter {
 
     public void changeDistance() {
         LayoutInflater li = LayoutInflater.from(activity.getContext());
-        View promptsView = li.inflate(R.layout.edit_text_dialog_number, null);
+        @SuppressLint("InflateParams") View promptsView = li.inflate(R.layout.edit_text_dialog_number, null);
 
         AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(activity.getContext());
         mDialogBuilder.setView(promptsView);
@@ -57,13 +58,13 @@ public class AddExerciseRecordPresenter {
 
         mDialogBuilder
                 .setCancelable(false)
-                .setPositiveButton("OK",
+                .setPositiveButton(activity.getResources().getString(R.string.ok),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 activity.setTextViewDistance(userInput.getText().toString());
                             }
                         })
-                .setNegativeButton("Отмена",
+                .setNegativeButton(activity.getResources().getString(R.string.cancel),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
@@ -82,7 +83,7 @@ public class AddExerciseRecordPresenter {
                 .show();
     }
 
-    TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
+    private TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             time.set(Calendar.HOUR_OF_DAY, hourOfDay);
             time.set(Calendar.MINUTE, minute);
@@ -99,7 +100,7 @@ public class AddExerciseRecordPresenter {
                 .show();
     }
 
-    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
+    private DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             date.set(Calendar.YEAR, year);
             date.set(Calendar.MONTH, monthOfYear);
@@ -110,7 +111,7 @@ public class AddExerciseRecordPresenter {
 
     public void changeComment() {
         LayoutInflater li = LayoutInflater.from(activity.getContext());
-        View promptsView = li.inflate(R.layout.edit_text_dialog_text, null);
+        @SuppressLint("InflateParams") View promptsView = li.inflate(R.layout.edit_text_dialog_text, null);
 
         AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(activity.getContext());
         mDialogBuilder.setView(promptsView);
@@ -138,19 +139,19 @@ public class AddExerciseRecordPresenter {
     public void save() {
         ActivityRecordModel model = activity.getModel();
         if (model.getActivity().isEmpty() || model.getActivity() == null) {
-            activity.showToast("Выберите упражнение");
+            activity.showToast(activity.getResources().getString(R.string.choose_exercise));
             return;
         }
         if (model.getDate() == null) {
-            activity.showToast("Укажите дату");
+            activity.showToast(activity.getResources().getString(R.string.choose_date));
             return;
         }
         if (model.getDistance() == -1) {
-            activity.showToast("Укажите дистанцию");
+            activity.showToast(activity.getResources().getString(R.string.choose_distance));
             return;
         }
         if (model.getTime() == 0) {
-            activity.showToast("Укажите продолжительность");
+            activity.showToast(activity.getResources().getString(R.string.choose_duration));
             return;
         }
         if (model.getComment().isEmpty() || model.getComment() == null) {
@@ -159,7 +160,7 @@ public class AddExerciseRecordPresenter {
         repository.open();
         repository.insert(model);
         repository.close();
-        activity.showToast("Ok");
+        activity.showToast(activity.getResources().getString(R.string.ok));
         activity.finish();
     }
 

@@ -25,6 +25,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
         android:background="@color/colorBackgroung"
+        android:contentDescription="@string/cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
@@ -36,6 +37,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
         android:background="@color/colorBackgroung"
+        android:contentDescription="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_add" />
