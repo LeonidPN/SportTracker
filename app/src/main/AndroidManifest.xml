@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Views.GoalsActivity"></activity>
+        <activity android:name=".Views.PreferencesActivity"></activity>
+        <activity android:name=".Views.AboutActivity" />
+        <activity android:name=".Views.ExerciseRecordsActivity" />
+        <activity android:name=".Views.GoalsActivity" />
         <activity android:name=".Views.ProfileActivity" />
         <activity android:name=".Views.AddExerciseRecordActivity" />
         <activity

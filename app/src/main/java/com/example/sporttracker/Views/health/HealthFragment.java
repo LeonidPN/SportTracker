@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.sporttracker.Views.AddExerciseRecordActivity;
 import com.example.sporttracker.R;
+import com.example.sporttracker.Views.ExerciseRecordsActivity;
 
 public class HealthFragment extends Fragment {
 
@@ -36,7 +37,7 @@ public class HealthFragment extends Fragment {
         textView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AddExerciseRecordActivity.class);
+                Intent intent = new Intent(v.getContext(), ExerciseRecordsActivity.class);
                 v.getContext().startActivity(intent);
             }
         });

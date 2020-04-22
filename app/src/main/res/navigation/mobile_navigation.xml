@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_me"
-        android:name="com.example.sporttracker.Views.me.MeFragment"
+        android:name="com.example.sporttracker.Views.MeFragment"
         android:label="@string/title_me"
         tools:layout="@layout/fragment_me" />
 </navigation>
