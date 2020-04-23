@@ -119,13 +119,13 @@ public class AddExerciseRecordPresenter {
 
         mDialogBuilder
                 .setCancelable(false)
-                .setPositiveButton("OK",
+                .setPositiveButton(activity.getResources().getString(R.string.ok),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 activity.setTextViewComment(userInput.getText().toString());
                             }
                         })
-                .setNegativeButton("Отмена",
+                .setNegativeButton(activity.getResources().getString(R.string.cancel),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();

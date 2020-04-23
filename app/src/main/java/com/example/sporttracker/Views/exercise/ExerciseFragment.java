@@ -25,7 +25,7 @@ public class ExerciseFragment extends Fragment {
         exerciseViewModel =
                 ViewModelProviders.of(this).get(ExerciseViewModel.class);
         View root = inflater.inflate(R.layout.fragment_exercise, container, false);
-        final TextView textView = root.findViewById(R.id.text_title);
+        final TextView textView = root.findViewById(R.id.textViewTitle);
         exerciseViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
