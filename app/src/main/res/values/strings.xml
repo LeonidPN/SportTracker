@@ -24,4 +24,14 @@
     <string name="preferences">Настройки</string>
     <string name="about">О приложении</string>
     <string name="arrow">Стрелка</string>
+    <string name="sex">Пол</string>
+    <string name="date_of_birth">Дата рождения</string>
+    <string name="height">Рост</string>
+    <string name="weight">Вес</string>
+    <string name="sex_default_value">Не указан</string>
+    <string name="date_of_birth_default_value">August 1, 1990</string>
+    <string name="height_default_value">170</string>
+    <string name="weight_default_value">60</string>
+    <string name="male">Мужской</string>
+    <string name="female">Женский</string>
 </resources>

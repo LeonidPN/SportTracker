@@ -22,9 +22,12 @@ public class MeFragment extends Fragment {
     private ConstraintLayout constraintLayoutPreferences;
     private ConstraintLayout constraintLayoutAbout;
 
+    private Context context;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_me, container, false);
+        context = root.getContext();
 
         presenter = new MePresenter();
 
@@ -66,7 +69,7 @@ public class MeFragment extends Fragment {
         return root;
     }
 
-    public Context getContext(){
-        return getContext();
+    public Context getContext() {
+        return context;
     }
 }
