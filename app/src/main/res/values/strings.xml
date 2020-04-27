@@ -34,4 +34,5 @@
     <string name="weight_default_value">60</string>
     <string name="male">Мужской</string>
     <string name="female">Женский</string>
+    <string name="calories">Калории</string>
 </resources>
