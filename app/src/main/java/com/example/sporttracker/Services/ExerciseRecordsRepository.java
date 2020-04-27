@@ -11,11 +11,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityRecordRepository extends AbstractRepository {
+public class ExerciseRecordsRepository extends AbstractRepository {
 
     private SimpleDateFormat formatForDate = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 
-    public ActivityRecordRepository(Context context) {
+    public ExerciseRecordsRepository(Context context) {
         super(context);
         table = DatabaseHelper.Tables.ActivityRecordTable.NAME;
         columns = new String[]{DatabaseHelper.Tables.ActivityRecordTable.COLUMN_ID,

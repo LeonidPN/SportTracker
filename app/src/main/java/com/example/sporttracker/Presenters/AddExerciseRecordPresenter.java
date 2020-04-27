@@ -14,7 +14,7 @@ import android.widget.TimePicker;
 import com.example.sporttracker.Models.Activities;
 import com.example.sporttracker.Models.ActivityRecordModel;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.ActivityRecordRepository;
+import com.example.sporttracker.Services.ExerciseRecordsRepository;
 import com.example.sporttracker.Views.AddExerciseRecordActivity;
 
 import java.util.Calendar;
@@ -22,12 +22,12 @@ import java.util.Calendar;
 public class AddExerciseRecordPresenter {
 
     private AddExerciseRecordActivity activity;
-    private ActivityRecordRepository repository;
+    private ExerciseRecordsRepository repository;
 
     private Calendar date = Calendar.getInstance();
     private Calendar time = Calendar.getInstance();
 
-    public AddExerciseRecordPresenter(ActivityRecordRepository repository) {
+    public AddExerciseRecordPresenter(ExerciseRecordsRepository repository) {
         this.repository = repository;
         time.set(1970, 0, 0, 0, 0, 0);
     }

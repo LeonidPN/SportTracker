@@ -17,7 +17,7 @@ import com.example.sporttracker.Models.Activities;
 import com.example.sporttracker.Models.ActivityRecordModel;
 import com.example.sporttracker.Presenters.AddExerciseRecordPresenter;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.ActivityRecordRepository;
+import com.example.sporttracker.Services.ExerciseRecordsRepository;
 
 import java.util.Calendar;
 
@@ -46,7 +46,7 @@ public class AddExerciseRecordActivity extends AppCompatActivity {
     }
 
     private void init() {
-        presenter = new AddExerciseRecordPresenter(new ActivityRecordRepository(this));
+        presenter = new AddExerciseRecordPresenter(new ExerciseRecordsRepository(this));
         presenter.attachView(this);
         presenter.viewIsReady();
 
