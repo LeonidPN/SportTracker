@@ -10,7 +10,7 @@ import java.util.List;
 
 public abstract class AbstractRepository<T> {
 
-    protected DatabaseHelper dbHelper;
+    private DatabaseHelper dbHelper;
     protected SQLiteDatabase database;
 
     protected String table;
@@ -44,7 +44,7 @@ public abstract class AbstractRepository<T> {
     abstract public long insert(T element);
 
     public int delete(int elementId){
-        String whereClause = "_id = ?";
+        String whereClause = "id = ?";
         String[] whereArgs = new String[]{String.valueOf(elementId)};
         return database.delete(table, whereClause, whereArgs);
     }

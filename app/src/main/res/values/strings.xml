@@ -35,4 +35,7 @@
     <string name="male">Мужской</string>
     <string name="female">Женский</string>
     <string name="calories">Калории</string>
+    <string name="delete_question">Вы уверены, что хотите удалить запись?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>

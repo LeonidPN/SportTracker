@@ -85,17 +85,17 @@ public class ExerciseRecordsActivity extends AppCompatActivity {
         spinner.setSelection(0);
     }
 
-    public void updateListAdapter(ArrayList<ArrayList<ActivityRecordModel>> groups){
+    public void updateListAdapter(ArrayList<ArrayList<ActivityRecordModel>> groups) {
         ExersiseRecordsExpendableListAdapter adapter =
-                new ExersiseRecordsExpendableListAdapter(this, groups, exercise);
+                new ExersiseRecordsExpendableListAdapter(this, groups, exercise, presenter);
         expandableListView.setAdapter(adapter);
     }
 
-    public String getExercise(){
+    public String getExercise() {
         return exercise;
     }
 
-    public Context getContext(){
+    public Context getContext() {
         return this;
     }
 

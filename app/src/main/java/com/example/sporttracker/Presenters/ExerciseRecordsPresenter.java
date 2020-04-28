@@ -1,9 +1,13 @@
 package com.example.sporttracker.Presenters;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import com.example.sporttracker.Models.Activities;
 import com.example.sporttracker.Models.ActivityRecordModel;
+import com.example.sporttracker.R;
 import com.example.sporttracker.Services.ExerciseRecordsRepository;
 import com.example.sporttracker.Views.ExerciseRecordsActivity;
 
@@ -79,6 +83,30 @@ public class ExerciseRecordsPresenter {
         activity.updateListAdapter(groups);
     }
 
+    public void deleteRecord(final int id){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity.getContext());
+        builder.setMessage(R.string.delete_question);
+        builder.setCancelable(false);
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                repository.open();
+                repository.delete(id);
+                repository.close();
+
+                activity.updateActivityList(Activities.values());
+            }
+        });
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
     public void startActivity(Class<?> T) {
         Intent intent = new Intent(activity.getContext(), T);
         activity.getContext().startActivity(intent);
@@ -86,6 +114,10 @@ public class ExerciseRecordsPresenter {
 
     public void closeActivity() {
         activity.finish();
+    }
+
+    private String getResourceString(int id) {
+        return activity.getResources().getString(id);
     }
 
 }

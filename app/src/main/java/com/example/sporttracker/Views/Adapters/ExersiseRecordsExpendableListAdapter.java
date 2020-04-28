@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sporttracker.Models.Activities;
 import com.example.sporttracker.Models.ActivityRecordModel;
+import com.example.sporttracker.Presenters.ExerciseRecordsPresenter;
 import com.example.sporttracker.R;
 import com.example.sporttracker.Services.PreferencesRepository;
 
@@ -25,12 +26,16 @@ public class ExersiseRecordsExpendableListAdapter extends BaseExpandableListAdap
     private Context context;
     private String exercise;
 
+    private ExerciseRecordsPresenter presenter;
+
     public ExersiseRecordsExpendableListAdapter(Context context,
                                                 ArrayList<ArrayList<ActivityRecordModel>> groups,
-                                                String exercise) {
+                                                String exercise,
+                                                ExerciseRecordsPresenter presenter) {
         this.context = context;
         this.groups = groups;
         this.exercise = exercise;
+        this.presenter = presenter;
     }
 
     @Override
@@ -116,20 +121,20 @@ public class ExersiseRecordsExpendableListAdapter extends BaseExpandableListAdap
 
         float calories = 0;
 
-        if(exercise.equals(Activities.RUN.getName())){
-            calories = Activities.RUN.getCalories(distance/(float)time / 1000 * 3600)
+        if (exercise.equals(Activities.RUN.getName())) {
+            calories = Activities.RUN.getCalories(distance / (float) time / 1000 * 3600)
                     * time * Float.parseFloat(preferencesRepository.getWeight());
         }
-        if(exercise.equals(Activities.CYCLE.getName())){
-            calories = Activities.CYCLE.getCalories(distance/(float)time / 1000 * 3600)
+        if (exercise.equals(Activities.CYCLE.getName())) {
+            calories = Activities.CYCLE.getCalories(distance / (float) time / 1000 * 3600)
                     * time * Float.parseFloat(preferencesRepository.getWeight());
         }
-        if(exercise.equals(Activities.SWIM.getName())){
-            calories = Activities.SWIM.getCalories(distance/(float)time / 1000 * 3600)
+        if (exercise.equals(Activities.SWIM.getName())) {
+            calories = Activities.SWIM.getCalories(distance / (float) time / 1000 * 3600)
                     * time * Float.parseFloat(preferencesRepository.getWeight());
         }
-        if(exercise.equals(Activities.WALK.getName())){
-            calories = Activities.WALK.getCalories(distance/(float)time / 1000 * 3600)
+        if (exercise.equals(Activities.WALK.getName())) {
+            calories = Activities.WALK.getCalories(distance / (float) time / 1000 * 3600)
                     * time * Float.parseFloat(preferencesRepository.getWeight());
         }
 
@@ -138,7 +143,7 @@ public class ExersiseRecordsExpendableListAdapter extends BaseExpandableListAdap
 
         RecyclerView recyclerView = convertView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new ExerciseRecordsItemRecyclerViewAdapter(list));
+        recyclerView.setAdapter(new ExerciseRecordsItemRecyclerViewAdapter(list, presenter));
 
         return convertView;
     }

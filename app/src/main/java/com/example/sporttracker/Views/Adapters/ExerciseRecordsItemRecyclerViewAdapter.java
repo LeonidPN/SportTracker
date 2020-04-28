@@ -1,5 +1,7 @@
 package com.example.sporttracker.Views.Adapters;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sporttracker.Models.ActivityRecordModel;
+import com.example.sporttracker.Presenters.ExerciseRecordsPresenter;
 import com.example.sporttracker.R;
 
 import java.text.SimpleDateFormat;
@@ -20,6 +23,8 @@ public class ExerciseRecordsItemRecyclerViewAdapter
 
     private ArrayList<ActivityRecordModel> list;
 
+    private ExerciseRecordsPresenter presenter;
+
     public static class ExerciseRecordsItemRecyclerViewHolder extends RecyclerView.ViewHolder {
         private View view;
 
@@ -29,8 +34,10 @@ public class ExerciseRecordsItemRecyclerViewAdapter
         }
     }
 
-    public ExerciseRecordsItemRecyclerViewAdapter(ArrayList<ActivityRecordModel> list) {
+    public ExerciseRecordsItemRecyclerViewAdapter(ArrayList<ActivityRecordModel> list,
+                                                  ExerciseRecordsPresenter presenter) {
         this.list = list;
+        this.presenter = presenter;
     }
 
     @NonNull
@@ -44,7 +51,7 @@ public class ExerciseRecordsItemRecyclerViewAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ExerciseRecordsItemRecyclerViewHolder holder, int position) {
-        ActivityRecordModel recordModel = list.get(position);
+        final ActivityRecordModel recordModel = list.get(position);
 
         ((TextView) holder.view.findViewById(R.id.textView_distance))
                 .setText(recordModel.getDistance() + " м");
@@ -65,6 +72,14 @@ public class ExerciseRecordsItemRecyclerViewAdapter
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        holder.view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                presenter.deleteRecord(recordModel.getId());
+                return true;
             }
         });
     }
