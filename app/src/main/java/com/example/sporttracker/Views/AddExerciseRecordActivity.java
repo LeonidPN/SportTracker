@@ -176,7 +176,7 @@ public class AddExerciseRecordActivity extends AppCompatActivity {
             model.setDate(date.getTime());
         }
         if(time != null) {
-            model.setTime(time.getTimeInMillis() / 1000);
+            model.setTime(time.getTimeInMillis());
         }
         model.setComment(textViewComment.getText().toString());
         return model;

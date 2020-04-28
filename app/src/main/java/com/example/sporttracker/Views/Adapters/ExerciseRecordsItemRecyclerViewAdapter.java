@@ -51,7 +51,7 @@ public class ExerciseRecordsItemRecyclerViewAdapter
 
         Date date = new Date();
         date.setTime(recordModel.getTime());
-        SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("H:m:s");
+        SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss");
 
         ((TextView) holder.view.findViewById(R.id.textView_time))
                 .setText(simpleTimeFormat.format(date));
