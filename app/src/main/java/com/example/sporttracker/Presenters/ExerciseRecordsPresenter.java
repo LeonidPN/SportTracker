@@ -1,7 +1,6 @@
 package com.example.sporttracker.Presenters;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
@@ -83,7 +82,7 @@ public class ExerciseRecordsPresenter {
         activity.updateListAdapter(groups);
     }
 
-    public void deleteRecord(final int id){
+    public void deleteRecord(final int id) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity.getContext());
         builder.setMessage(R.string.delete_question);
         builder.setCancelable(false);
@@ -109,6 +108,12 @@ public class ExerciseRecordsPresenter {
 
     public void startActivity(Class<?> T) {
         Intent intent = new Intent(activity.getContext(), T);
+        activity.getContext().startActivity(intent);
+    }
+
+    public void startActivity(Class<?> T, int id) {
+        Intent intent = new Intent(activity.getContext(), T);
+        intent.putExtra(getResourceString(R.string.id), id);
         activity.getContext().startActivity(intent);
     }
 

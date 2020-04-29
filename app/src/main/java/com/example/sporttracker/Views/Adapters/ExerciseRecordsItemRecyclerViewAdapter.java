@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sporttracker.Models.ActivityRecordModel;
 import com.example.sporttracker.Presenters.ExerciseRecordsPresenter;
 import com.example.sporttracker.R;
+import com.example.sporttracker.Views.ExerciseRecordDetailsActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public class ExerciseRecordsItemRecyclerViewAdapter
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                presenter.startActivity(ExerciseRecordDetailsActivity.class, recordModel.getId());
             }
         });
 
