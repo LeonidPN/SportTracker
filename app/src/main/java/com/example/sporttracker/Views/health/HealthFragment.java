@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.sporttracker.Views.StatisticActivity;
 import com.example.sporttracker.Views.AddExerciseRecordActivity;
 import com.example.sporttracker.R;
 import com.example.sporttracker.Views.ExerciseRecordsActivity;
@@ -56,6 +57,15 @@ public class HealthFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), AddExerciseRecordActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
+
+        TextView textView7 = root.findViewById(R.id.textView7);
+        textView7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), StatisticActivity.class);
                 v.getContext().startActivity(intent);
             }
         });

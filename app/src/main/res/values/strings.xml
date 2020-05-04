@@ -39,4 +39,11 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="id">id</string>
+    <string name="week">Неделя</string>
+    <string name="month">Месяц</string>
+    <string name="year">Год</string>
+    <string name="all">Всего</string>
+    <string name="all_distance">Общая дистанция</string>
+    <string name="all_calories">Всего калорий</string>
+    <string name="all_duration">Общая продолжительность</string>
 </resources>
