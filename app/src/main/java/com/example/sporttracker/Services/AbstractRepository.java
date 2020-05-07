@@ -41,7 +41,9 @@ public abstract class AbstractRepository<T> {
 
     abstract public T getElement(int id);
 
-    abstract public long insert(T element);
+    public long insert(T element) {
+        return database.insert(table, null, getContentValues(element));
+    }
 
     public int delete(int elementId){
         String whereClause = "id = ?";
@@ -51,6 +53,6 @@ public abstract class AbstractRepository<T> {
 
     abstract public int update(T element);
 
-    abstract ContentValues getContentValues(T element);
+    abstract protected ContentValues getContentValues(T element);
 
 }
