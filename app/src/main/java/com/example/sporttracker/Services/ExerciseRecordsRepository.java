@@ -85,11 +85,6 @@ public class ExerciseRecordsRepository extends AbstractRepository {
     }
 
     @Override
-    public long insert(Object element) {
-        return database.insert(table, null, getContentValues(element));
-    }
-
-    @Override
     public int update(Object element) {
         String whereClause = DatabaseHelper.Tables.ActivityRecordTable.COLUMN_ID + "="
                 + ((ActivityRecordModel) element).getId();
@@ -98,7 +93,7 @@ public class ExerciseRecordsRepository extends AbstractRepository {
     }
 
     @Override
-    ContentValues getContentValues(Object element) {
+    protected ContentValues getContentValues(Object element) {
         ContentValues cv = new ContentValues();
         cv.put(DatabaseHelper.Tables.ActivityRecordTable.COLUMN_DATE, formatForDate.format(((ActivityRecordModel) element).getDate()));
         cv.put(DatabaseHelper.Tables.ActivityRecordTable.COLUMN_TIME, ((ActivityRecordModel) element).getTime());
