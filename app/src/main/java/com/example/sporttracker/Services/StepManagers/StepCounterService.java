@@ -107,14 +107,11 @@ public class StepCounterService extends Service implements SensorEventListener {
             if (flagHour) {
                 preferences.setStepCountDelta(delta);
             }
-            if (steps < 35) {
+            if (steps < 25) {
                 preferences.setStepCountDelta(0);
-            }
-            if (preferences.getStepCountDelta() == 0) {
-                preferences.setStepCountDelta(1);
-                stepCount = (int) event.values[0] + stepCount;
+                stepCount = steps + stepCount;
             } else {
-                stepCount = (int) event.values[0] - preferences.getStepCountDelta();
+                stepCount = steps - preferences.getStepCountDelta();
             }
         }
         if (event.sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
@@ -127,14 +124,22 @@ public class StepCounterService extends Service implements SensorEventListener {
 
         model.setCount(stepCount);
 
-        if (flagHour) {
-            repository.update(model);
+        if (list.size() > 0) {
+            if (!flagHour) {
+                repository.update(model);
+            } else {
+                Calendar calendar = Calendar.getInstance();
+                model.setHourInDay(calendar.get(Calendar.HOUR_OF_DAY));
+                model.setDate(calendar.getTime());
+                repository.insert(model);
+            }
         } else {
             Calendar calendar = Calendar.getInstance();
             model.setHourInDay(calendar.get(Calendar.HOUR_OF_DAY));
             model.setDate(calendar.getTime());
             repository.insert(model);
         }
+
     }
 
     @Override
