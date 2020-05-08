@@ -35,7 +35,7 @@ public class PreferencesRepository {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(SEX_KEY, sex);
         editor.putBoolean(SEX_CHANGED_KEY, true);
-        editor.commit();
+        editor.apply();
     }
 
     public boolean getSexChanged() {
@@ -50,7 +50,7 @@ public class PreferencesRepository {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(DATE_OF_BIRTH_KEY, date);
         editor.putBoolean(DATE_OF_BIRTH_CHANGED_KEY, true);
-        editor.commit();
+        editor.apply();
     }
 
     public boolean getDateOfBirthChanged() {
@@ -65,7 +65,7 @@ public class PreferencesRepository {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(HEIGHT_KEY, height);
         editor.putBoolean(HEIGHT_CHANGED_KEY, true);
-        editor.commit();
+        editor.apply();
     }
 
     public boolean getHeightChanged() {
@@ -80,7 +80,7 @@ public class PreferencesRepository {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(WEIGHT_KEY, weight);
         editor.putBoolean(WEIGHT_CHANGED_KEY, true);
-        editor.commit();
+        editor.apply();
     }
 
     public boolean getWeightChanged() {
@@ -90,7 +90,7 @@ public class PreferencesRepository {
     public void setStepCountDelta(int delta) {
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt(STEP_COUNT_DELTA_KEY, delta);
-        editor.commit();
+        editor.apply();
     }
 
     public int getStepCountDelta() {
