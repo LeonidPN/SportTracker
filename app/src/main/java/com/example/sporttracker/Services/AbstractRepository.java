@@ -5,19 +5,22 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public abstract class AbstractRepository<T> {
 
-    private DatabaseHelper dbHelper;
+    protected SimpleDateFormat formatForDate = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+
+    protected SQLiteOpenHelper dbHelper;
     protected SQLiteDatabase database;
 
     protected String table;
     protected String[] columns;
 
     public AbstractRepository(Context context){
-        dbHelper = new DatabaseHelper(context.getApplicationContext());
     }
 
     public AbstractRepository open(){

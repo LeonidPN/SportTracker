@@ -7,16 +7,14 @@ import android.database.Cursor;
 import com.example.sporttracker.Models.ActivityRecordModel;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseRecordsRepository extends AbstractRepository {
 
-    private SimpleDateFormat formatForDate = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-
     public ExerciseRecordsRepository(Context context) {
         super(context);
+        dbHelper = new DatabaseHelper(context);
         table = DatabaseHelper.Tables.ActivityRecordTable.NAME;
         columns = new String[]{DatabaseHelper.Tables.ActivityRecordTable.COLUMN_ID,
                 DatabaseHelper.Tables.ActivityRecordTable.COLUMN_DATE,

@@ -1,5 +1,6 @@
 package com.example.sporttracker.Views.health;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,33 +8,43 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.example.sporttracker.Views.StatisticActivity;
-import com.example.sporttracker.Views.AddExerciseRecordActivity;
+import com.example.sporttracker.Presenters.HealthPresenter;
 import com.example.sporttracker.R;
+import com.example.sporttracker.Services.PreferencesRepository;
+import com.example.sporttracker.Services.StepsDatabase.StepsRecordsRepository;
+import com.example.sporttracker.Views.AddExerciseRecordActivity;
 import com.example.sporttracker.Views.ExerciseRecordsActivity;
+import com.example.sporttracker.Views.StatisticActivity;
 
 public class HealthFragment extends Fragment {
 
-    private HealthViewModel healthViewModel;
+    private HealthPresenter presenter;
+
+    private Context context;
+
+    private TextView textViewSteps;
+    private TextView textViewDistance;
+    private TextView textViewCalories;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        healthViewModel =
-                ViewModelProviders.of(this).get(HealthViewModel.class);
         View root = inflater.inflate(R.layout.fragment_health, container, false);
-        final TextView textView = root.findViewById(R.id.text_health);
-        healthViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        context = root.getContext();
+
+        presenter = new HealthPresenter(new StepsRecordsRepository(context),
+                new PreferencesRepository(context));
+        presenter.attachView(this);
+
+        textViewSteps = root.findViewById(R.id.textView_steps);
+        textViewDistance = root.findViewById(R.id.textView_distance);
+        textViewCalories = root.findViewById(R.id.textView_calories);
+
+        presenter.viewIsReady();
+
         TextView textView4 = root.findViewById(R.id.textView4);
         textView4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,5 +82,21 @@ public class HealthFragment extends Fragment {
         });
 
         return root;
+    }
+
+    public void updateViews(int steps, float distance, float calories) {
+        textViewSteps.setText(steps + " шагов");
+        textViewDistance.setText(String.format("%.1f", distance) + " м");
+        textViewCalories.setText(String.format("%.1f", calories) + " ккал");
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.viewIsReady();
     }
 }
