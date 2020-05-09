@@ -11,8 +11,8 @@ import android.hardware.SensorManager;
 import android.os.IBinder;
 
 import com.example.sporttracker.Models.StepsRecordModel;
-import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 import com.example.sporttracker.Services.Repositories.Databases.StepsDatabase.StepsRecordsRepository;
+import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -69,6 +69,7 @@ public class StepCounterService extends Service implements SensorEventListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        onStartCommand(null, 0, 0);
     }
 
     @Override

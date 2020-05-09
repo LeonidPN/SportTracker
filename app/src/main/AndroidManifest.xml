@@ -17,7 +17,7 @@
             android:name=".Services.StepManagers.StepCounterService"
             android:enabled="true"
             android:exported="true"
-            android:process=":StepCounterServiceProcess" />
+            android:process=":stepCounterServiceProcess" />
 
         <activity
             android:name=".Views.Activities.StatisticActivity"
