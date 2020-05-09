@@ -40,7 +40,6 @@ public class StepCounterService extends Service implements SensorEventListener {
         super.onCreate();
 
         repository = new StepsRecordsRepository(this);
-        repository.open();
 
         preferences = new PreferencesRepository(this);
 
@@ -53,13 +52,13 @@ public class StepCounterService extends Service implements SensorEventListener {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_STEP_COUNTER)) {
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
         } else if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_STEP_DETECTOR)) {
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
         } else if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)) {
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
         } else {
             //Нет необходимых сенсоров
         }
@@ -70,12 +69,12 @@ public class StepCounterService extends Service implements SensorEventListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        repository.close();
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        repository.open();
+
         ArrayList<StepsRecordModel> list = (ArrayList<StepsRecordModel>) repository.getList();
 
         StepsRecordModel model = new StepsRecordModel();
@@ -139,6 +138,8 @@ public class StepCounterService extends Service implements SensorEventListener {
             model.setDate(calendar.getTime());
             repository.insert(model);
         }
+
+        repository.close();
 
     }
 
