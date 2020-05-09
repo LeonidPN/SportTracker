@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    tools:context=".Views.StatisticFragment">
+    tools:context=".Views.Fragments.StatisticFragment">
 
     <ScrollView
         android:layout_width="match_parent"

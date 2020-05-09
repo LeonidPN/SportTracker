@@ -1,14 +1,14 @@
-package com.example.sporttracker.Services;
+package com.example.sporttracker.Services.Repositories.Databases.ActivitiesDatabase;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class ActivitiesDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "datebase.db";
     private static final int SCHEMA = 2;
 
-    public DatabaseHelper(Context context) {
+    public ActivitiesDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, SCHEMA);
     }
 

@@ -1,4 +1,4 @@
-package com.example.sporttracker.Views.exercise;
+package com.example.sporttracker.Views.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,20 +18,9 @@ import com.example.sporttracker.R;
 
 public class ExerciseFragment extends Fragment {
 
-    private ExerciseViewModel exerciseViewModel;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        exerciseViewModel =
-                ViewModelProviders.of(this).get(ExerciseViewModel.class);
         View root = inflater.inflate(R.layout.fragment_exercise, container, false);
-        final TextView textView = root.findViewById(R.id.textViewTitle);
-        exerciseViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
 
         final Spinner spinner = root.findViewById(R.id.spinner_exercise);
         String[] cities = {"Бег", "Велосипед", "Ходьба"};

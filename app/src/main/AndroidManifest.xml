@@ -20,39 +20,39 @@
             android:process=":StepCounterServiceProcess" />
 
         <activity
-            android:name=".Views.StatisticActivity"
+            android:name=".Views.Activities.StatisticActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Views.ExerciseRecordDetailsActivity"
+            android:name=".Views.Activities.ExerciseRecordDetailsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Views.PreferencesActivity"
+            android:name=".Views.Activities.PreferencesActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Views.AboutActivity"
+            android:name=".Views.Activities.AboutActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Views.ExerciseRecordsActivity"
+            android:name=".Views.Activities.ExerciseRecordsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Views.GoalsActivity"
+            android:name=".Views.Activities.GoalsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Views.ProfileActivity"
+            android:name=".Views.Activities.ProfileActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Views.AddExerciseRecordActivity"
+            android:name=".Views.Activities.AddExerciseRecordActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Views.MainActivity"
+            android:name=".Views.Activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">

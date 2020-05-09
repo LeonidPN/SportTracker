@@ -1,4 +1,4 @@
-package com.example.sporttracker.Services;
+package com.example.sporttracker.Services.Repositories.Databases;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public abstract class AbstractRepository<T> {
+public abstract class AbstractDatabaseRepository<T> {
 
     protected SimpleDateFormat formatForDate = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 
@@ -20,10 +20,10 @@ public abstract class AbstractRepository<T> {
     protected String table;
     protected String[] columns;
 
-    public AbstractRepository(Context context){
+    public AbstractDatabaseRepository(Context context){
     }
 
-    public AbstractRepository open(){
+    public AbstractDatabaseRepository open(){
         database = dbHelper.getWritableDatabase();
         return this;
     }

@@ -11,11 +11,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.example.sporttracker.Models.Activities;
-import com.example.sporttracker.Models.ActivityRecordModel;
+import com.example.sporttracker.Models.Enumerations.Activities;
+import com.example.sporttracker.Models.ExerciseRecordModel;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.ExerciseRecordsRepository;
-import com.example.sporttracker.Views.AddExerciseRecordActivity;
+import com.example.sporttracker.Services.Repositories.Databases.ActivitiesDatabase.ExerciseRecordsRepository;
+import com.example.sporttracker.Views.Activities.AddExerciseRecordActivity;
 
 import java.util.Calendar;
 
@@ -137,7 +137,7 @@ public class AddExerciseRecordPresenter {
     }
 
     public void save() {
-        ActivityRecordModel model = activity.getModel();
+        ExerciseRecordModel model = activity.getModel();
         if (model.getActivity().isEmpty() || model.getActivity() == null) {
             activity.showToast(activity.getResources().getString(R.string.choose_exercise));
             return;

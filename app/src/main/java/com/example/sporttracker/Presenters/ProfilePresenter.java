@@ -6,13 +6,12 @@ import android.content.DialogInterface;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.PreferencesRepository;
-import com.example.sporttracker.Views.ProfileActivity;
+import com.example.sporttracker.Services.Repositories.PreferencesRepository;
+import com.example.sporttracker.Views.Activities.ProfileActivity;
 
 import java.text.DateFormat;
 import java.text.ParseException;

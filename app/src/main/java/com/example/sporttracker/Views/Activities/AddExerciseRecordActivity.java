@@ -1,4 +1,4 @@
-package com.example.sporttracker.Views;
+package com.example.sporttracker.Views.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,11 +13,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sporttracker.Models.Activities;
-import com.example.sporttracker.Models.ActivityRecordModel;
+import com.example.sporttracker.Models.Enumerations.Activities;
+import com.example.sporttracker.Models.ExerciseRecordModel;
 import com.example.sporttracker.Presenters.AddExerciseRecordPresenter;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.ExerciseRecordsRepository;
+import com.example.sporttracker.Services.Repositories.Databases.ActivitiesDatabase.ExerciseRecordsRepository;
 
 import java.util.Calendar;
 
@@ -163,8 +163,8 @@ public class AddExerciseRecordActivity extends AppCompatActivity {
                 DateUtils.FORMAT_SHOW_TIME));
     }
 
-    public ActivityRecordModel getModel() {
-        ActivityRecordModel model = new ActivityRecordModel();
+    public ExerciseRecordModel getModel() {
+        ExerciseRecordModel model = new ExerciseRecordModel();
         model.setActivity(exercise);
         if (textViewDistance.getText().toString().isEmpty() || textViewDistance.getText().toString() == null) {
             model.setDistance(-1);

@@ -1,4 +1,4 @@
-package com.example.sporttracker.Views;
+package com.example.sporttracker.Views.Fragments;
 
 import android.os.Bundle;
 

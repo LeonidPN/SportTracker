@@ -4,11 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-import com.example.sporttracker.Models.Activities;
-import com.example.sporttracker.Models.ActivityRecordModel;
+import com.example.sporttracker.Models.Enumerations.Activities;
+import com.example.sporttracker.Models.ExerciseRecordModel;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.ExerciseRecordsRepository;
-import com.example.sporttracker.Views.ExerciseRecordsActivity;
+import com.example.sporttracker.Services.Repositories.Databases.ActivitiesDatabase.ExerciseRecordsRepository;
+import com.example.sporttracker.Views.Activities.ExerciseRecordsActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,33 +37,33 @@ public class ExerciseRecordsPresenter {
     }
 
     public void updateRecordsList() {
-        ArrayList<ArrayList<ActivityRecordModel>> groups = new ArrayList<>();
+        ArrayList<ArrayList<ExerciseRecordModel>> groups = new ArrayList<>();
 
         final String exercise = activity.getExercise();
 
         repository.open();
-        ArrayList<ActivityRecordModel> list = (ArrayList) repository.getList();
+        ArrayList<ExerciseRecordModel> list = (ArrayList) repository.getList();
         repository.close();
 
         if (list != null) {
 
-            list.removeIf(new Predicate<ActivityRecordModel>() {
+            list.removeIf(new Predicate<ExerciseRecordModel>() {
                 @Override
-                public boolean test(ActivityRecordModel n) {
+                public boolean test(ExerciseRecordModel n) {
                     return (!n.getActivity().equals(exercise));
                 }
             });
 
             if (list.size() > 0) {
 
-                list.sort(new Comparator<ActivityRecordModel>() {
+                list.sort(new Comparator<ExerciseRecordModel>() {
                     @Override
-                    public int compare(ActivityRecordModel o1, ActivityRecordModel o2) {
+                    public int compare(ExerciseRecordModel o1, ExerciseRecordModel o2) {
                         return -o1.getDate().compareTo(o2.getDate());
                     }
                 });
 
-                groups.add(new ArrayList<ActivityRecordModel>());
+                groups.add(new ArrayList<ExerciseRecordModel>());
                 groups.get(0).add(list.get(0));
 
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("LLLL yyyy");
@@ -71,7 +71,7 @@ public class ExerciseRecordsPresenter {
                 for (int i = 1; i < list.size(); i++) {
                     if (!simpleDateFormat.format(list.get(i).getDate())
                             .equals(simpleDateFormat.format(list.get(i - 1).getDate()))) {
-                        groups.add(new ArrayList<ActivityRecordModel>());
+                        groups.add(new ArrayList<ExerciseRecordModel>());
                     }
                     groups.get(groups.size() - 1).add(list.get(i));
                 }

@@ -1,4 +1,4 @@
-package com.example.sporttracker.Services.StepsDatabase;
+package com.example.sporttracker.Services.Repositories.Databases.StepsDatabase;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -1,4 +1,4 @@
-package com.example.sporttracker.Services;
+package com.example.sporttracker.Services.Repositories;
 
 import android.content.Context;
 import android.content.SharedPreferences;

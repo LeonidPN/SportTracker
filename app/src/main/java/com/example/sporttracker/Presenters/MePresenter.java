@@ -2,7 +2,7 @@ package com.example.sporttracker.Presenters;
 
 import android.content.Intent;
 
-import com.example.sporttracker.Views.MeFragment;
+import com.example.sporttracker.Views.Fragments.MeFragment;
 
 public class MePresenter {
 

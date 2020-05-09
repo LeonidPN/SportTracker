@@ -1,4 +1,4 @@
-package com.example.sporttracker.Views;
+package com.example.sporttracker.Views.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -11,12 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
-import com.example.sporttracker.Models.Activities;
+import com.example.sporttracker.Models.Enumerations.Activities;
 import com.example.sporttracker.Presenters.StatisticPresenter;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.ExerciseRecordsRepository;
-import com.example.sporttracker.Services.PreferencesRepository;
+import com.example.sporttracker.Services.Repositories.Databases.ActivitiesDatabase.ExerciseRecordsRepository;
+import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 import com.example.sporttracker.Views.Adapters.StatisticFragmentPagerAdapter;
+import com.example.sporttracker.Views.Fragments.StatisticFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class StatisticActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.sporttracker.Views;
+package com.example.sporttracker.Views.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

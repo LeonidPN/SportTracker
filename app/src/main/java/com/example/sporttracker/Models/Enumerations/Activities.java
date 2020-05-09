@@ -1,4 +1,4 @@
-package com.example.sporttracker.Models;
+package com.example.sporttracker.Models.Enumerations;
 
 public enum Activities {
 

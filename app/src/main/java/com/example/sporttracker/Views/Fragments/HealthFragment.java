@@ -1,4 +1,4 @@
-package com.example.sporttracker.Views.health;
+package com.example.sporttracker.Views.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,11 +13,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.sporttracker.Presenters.HealthPresenter;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.PreferencesRepository;
-import com.example.sporttracker.Services.StepsDatabase.StepsRecordsRepository;
-import com.example.sporttracker.Views.AddExerciseRecordActivity;
-import com.example.sporttracker.Views.ExerciseRecordsActivity;
-import com.example.sporttracker.Views.StatisticActivity;
+import com.example.sporttracker.Services.Repositories.PreferencesRepository;
+import com.example.sporttracker.Services.Repositories.Databases.StepsDatabase.StepsRecordsRepository;
+import com.example.sporttracker.Views.Activities.AddExerciseRecordActivity;
+import com.example.sporttracker.Views.Activities.ExerciseRecordsActivity;
+import com.example.sporttracker.Views.Activities.StatisticActivity;
 
 public class HealthFragment extends Fragment {
 

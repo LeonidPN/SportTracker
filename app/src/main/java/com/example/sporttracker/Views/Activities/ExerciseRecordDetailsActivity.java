@@ -1,4 +1,4 @@
-package com.example.sporttracker.Views;
+package com.example.sporttracker.Views.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,11 +8,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.sporttracker.Models.ActivityRecordModel;
+import com.example.sporttracker.Models.ExerciseRecordModel;
 import com.example.sporttracker.Presenters.ExerciseRecordDetailsPresenter;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.ExerciseRecordsRepository;
-import com.example.sporttracker.Services.PreferencesRepository;
+import com.example.sporttracker.Services.Repositories.Databases.ActivitiesDatabase.ExerciseRecordsRepository;
+import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 
 import java.text.SimpleDateFormat;
 
@@ -55,7 +55,7 @@ public class ExerciseRecordDetailsActivity extends AppCompatActivity {
         });
     }
 
-    public void setViews(ActivityRecordModel recordModel, float calories) {
+    public void setViews(ExerciseRecordModel recordModel, float calories) {
         textViewExercise.setText(recordModel.getActivity());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("LLLL d, yyyy");

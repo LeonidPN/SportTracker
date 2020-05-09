@@ -2,7 +2,7 @@ package com.example.sporttracker.Models;
 
 import java.util.Date;
 
-public class ActivityRecordModel {
+public class ExerciseRecordModel {
 
     private int id;
 

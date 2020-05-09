@@ -1,17 +1,17 @@
-package com.example.sporttracker.Services.StepsDatabase;
+package com.example.sporttracker.Services.Repositories.Databases.StepsDatabase;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
 import com.example.sporttracker.Models.StepsRecordModel;
-import com.example.sporttracker.Services.AbstractRepository;
+import com.example.sporttracker.Services.Repositories.Databases.AbstractDatabaseRepository;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StepsRecordsRepository extends AbstractRepository {
+public class StepsRecordsRepository extends AbstractDatabaseRepository {
 
     public StepsRecordsRepository(Context context) {
         super(context);

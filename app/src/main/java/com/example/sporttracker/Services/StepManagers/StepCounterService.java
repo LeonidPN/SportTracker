@@ -11,8 +11,8 @@ import android.hardware.SensorManager;
 import android.os.IBinder;
 
 import com.example.sporttracker.Models.StepsRecordModel;
-import com.example.sporttracker.Services.PreferencesRepository;
-import com.example.sporttracker.Services.StepsDatabase.StepsRecordsRepository;
+import com.example.sporttracker.Services.Repositories.PreferencesRepository;
+import com.example.sporttracker.Services.Repositories.Databases.StepsDatabase.StepsRecordsRepository;
 
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -2,12 +2,12 @@ package com.example.sporttracker.Presenters;
 
 import androidx.core.content.ContextCompat;
 
-import com.example.sporttracker.Models.Activities;
-import com.example.sporttracker.Models.ActivityRecordModel;
+import com.example.sporttracker.Models.Enumerations.Activities;
+import com.example.sporttracker.Models.ExerciseRecordModel;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.ExerciseRecordsRepository;
-import com.example.sporttracker.Services.PreferencesRepository;
-import com.example.sporttracker.Views.StatisticActivity;
+import com.example.sporttracker.Services.Repositories.Databases.ActivitiesDatabase.ExerciseRecordsRepository;
+import com.example.sporttracker.Services.Repositories.PreferencesRepository;
+import com.example.sporttracker.Views.Activities.StatisticActivity;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -30,7 +30,7 @@ public class StatisticPresenter {
 
     private PreferencesRepository preferences;
 
-    private ArrayList<ActivityRecordModel> exerciseRecords;
+    private ArrayList<ExerciseRecordModel> exerciseRecords;
 
     private Calendar[] week;
     private Calendar[] month;
@@ -79,19 +79,19 @@ public class StatisticPresenter {
         final String exercise = activity.getExercise();
 
         repository.open();
-        ArrayList<ActivityRecordModel> list = (ArrayList) repository.getList();
+        ArrayList<ExerciseRecordModel> list = (ArrayList) repository.getList();
         repository.close();
 
         if (list != null) {
-            list.removeIf(new Predicate<ActivityRecordModel>() {
+            list.removeIf(new Predicate<ExerciseRecordModel>() {
                 @Override
-                public boolean test(ActivityRecordModel n) {
+                public boolean test(ExerciseRecordModel n) {
                     return (!n.getActivity().equals(exercise));
                 }
             });
-            list.sort(new Comparator<ActivityRecordModel>() {
+            list.sort(new Comparator<ExerciseRecordModel>() {
                 @Override
-                public int compare(ActivityRecordModel o1, ActivityRecordModel o2) {
+                public int compare(ExerciseRecordModel o1, ExerciseRecordModel o2) {
                     return -o1.getDate().compareTo(o2.getDate());
                 }
             });
@@ -199,7 +199,7 @@ public class StatisticPresenter {
             float distance = 0;
             long duration = 0;
             long durationInMilis = 0;
-            for (ActivityRecordModel record : exerciseRecords) {
+            for (ExerciseRecordModel record : exerciseRecords) {
                 calendar.setTime(record.getDate());
                 if (calendar.get(Calendar.YEAR) < week[i].get(Calendar.YEAR)) {
                     break;
@@ -244,7 +244,7 @@ public class StatisticPresenter {
             float distance = 0;
             long duration = 0;
             long durationInMilis = 0;
-            for (ActivityRecordModel record : exerciseRecords) {
+            for (ExerciseRecordModel record : exerciseRecords) {
                 calendar.setTime(record.getDate());
                 if (calendar.get(Calendar.YEAR) < month[i].get(Calendar.YEAR)) {
                     break;
@@ -289,7 +289,7 @@ public class StatisticPresenter {
             float distance = 0;
             long duration = 0;
             long durationInMilis = 0;
-            for (ActivityRecordModel record : exerciseRecords) {
+            for (ExerciseRecordModel record : exerciseRecords) {
                 calendar.setTime(record.getDate());
                 if (calendar.get(Calendar.YEAR) < year[i].get(Calendar.YEAR)) {
                     break;
@@ -334,7 +334,7 @@ public class StatisticPresenter {
             float distance = 0;
             long duration = 0;
             long durationInMilis = 0;
-            for (ActivityRecordModel record : exerciseRecords) {
+            for (ExerciseRecordModel record : exerciseRecords) {
                 calendar.setTime(record.getDate());
                 if (calendar.get(Calendar.YEAR) < all[i].get(Calendar.YEAR)) {
                     break;

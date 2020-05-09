@@ -1,7 +1,5 @@
 package com.example.sporttracker.Views.Adapters;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +8,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sporttracker.Models.ActivityRecordModel;
+import com.example.sporttracker.Models.ExerciseRecordModel;
 import com.example.sporttracker.Presenters.ExerciseRecordsPresenter;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Views.ExerciseRecordDetailsActivity;
+import com.example.sporttracker.Views.Activities.ExerciseRecordDetailsActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +20,7 @@ import java.util.Date;
 public class ExerciseRecordsItemRecyclerViewAdapter
         extends RecyclerView.Adapter<ExerciseRecordsItemRecyclerViewAdapter.ExerciseRecordsItemRecyclerViewHolder> {
 
-    private ArrayList<ActivityRecordModel> list;
+    private ArrayList<ExerciseRecordModel> list;
 
     private ExerciseRecordsPresenter presenter;
 
@@ -35,7 +33,7 @@ public class ExerciseRecordsItemRecyclerViewAdapter
         }
     }
 
-    public ExerciseRecordsItemRecyclerViewAdapter(ArrayList<ActivityRecordModel> list,
+    public ExerciseRecordsItemRecyclerViewAdapter(ArrayList<ExerciseRecordModel> list,
                                                   ExerciseRecordsPresenter presenter) {
         this.list = list;
         this.presenter = presenter;
@@ -52,7 +50,7 @@ public class ExerciseRecordsItemRecyclerViewAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ExerciseRecordsItemRecyclerViewHolder holder, int position) {
-        final ActivityRecordModel recordModel = list.get(position);
+        final ExerciseRecordModel recordModel = list.get(position);
 
         ((TextView) holder.view.findViewById(R.id.textView_distance))
                 .setText(recordModel.getDistance() + " м");

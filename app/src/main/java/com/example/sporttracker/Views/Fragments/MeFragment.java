@@ -1,4 +1,4 @@
-package com.example.sporttracker.Views;
+package com.example.sporttracker.Views.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.sporttracker.Presenters.MePresenter;
 import com.example.sporttracker.R;
+import com.example.sporttracker.Views.Activities.AboutActivity;
+import com.example.sporttracker.Views.Activities.GoalsActivity;
+import com.example.sporttracker.Views.Activities.PreferencesActivity;
+import com.example.sporttracker.Views.Activities.ProfileActivity;
 
 public class MeFragment extends Fragment {
 

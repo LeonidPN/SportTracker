@@ -3,9 +3,9 @@ package com.example.sporttracker.Presenters;
 import android.content.Intent;
 
 import com.example.sporttracker.Models.StepsRecordModel;
-import com.example.sporttracker.Services.PreferencesRepository;
-import com.example.sporttracker.Services.StepsDatabase.StepsRecordsRepository;
-import com.example.sporttracker.Views.health.HealthFragment;
+import com.example.sporttracker.Services.Repositories.PreferencesRepository;
+import com.example.sporttracker.Services.Repositories.Databases.StepsDatabase.StepsRecordsRepository;
+import com.example.sporttracker.Views.Fragments.HealthFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;

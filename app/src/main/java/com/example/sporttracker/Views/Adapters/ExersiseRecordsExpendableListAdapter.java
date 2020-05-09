@@ -10,11 +10,11 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sporttracker.Models.Activities;
-import com.example.sporttracker.Models.ActivityRecordModel;
+import com.example.sporttracker.Models.Enumerations.Activities;
+import com.example.sporttracker.Models.ExerciseRecordModel;
 import com.example.sporttracker.Presenters.ExerciseRecordsPresenter;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.PreferencesRepository;
+import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,14 +22,14 @@ import java.util.Date;
 
 public class ExersiseRecordsExpendableListAdapter extends BaseExpandableListAdapter {
 
-    private ArrayList<ArrayList<ActivityRecordModel>> groups;
+    private ArrayList<ArrayList<ExerciseRecordModel>> groups;
     private Context context;
     private String exercise;
 
     private ExerciseRecordsPresenter presenter;
 
     public ExersiseRecordsExpendableListAdapter(Context context,
-                                                ArrayList<ArrayList<ActivityRecordModel>> groups,
+                                                ArrayList<ArrayList<ExerciseRecordModel>> groups,
                                                 String exercise,
                                                 ExerciseRecordsPresenter presenter) {
         this.context = context;
@@ -104,12 +104,12 @@ public class ExersiseRecordsExpendableListAdapter extends BaseExpandableListAdap
             convertView = inflater.inflate(R.layout.child_view_execise_records_list, null);
         }
 
-        ArrayList<ActivityRecordModel> list = groups.get(groupPosition);
+        ArrayList<ExerciseRecordModel> list = groups.get(groupPosition);
 
         float distance = 0;
         long time = 0;
 
-        for (ActivityRecordModel record : list) {
+        for (ExerciseRecordModel record : list) {
             distance += record.getDistance();
             time += record.getTime();
         }

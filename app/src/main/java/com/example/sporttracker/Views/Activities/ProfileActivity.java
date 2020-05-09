@@ -1,4 +1,4 @@
-package com.example.sporttracker.Views;
+package com.example.sporttracker.Views.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.sporttracker.Presenters.ProfilePresenter;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.PreferencesRepository;
+import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 
 import java.util.Calendar;
 

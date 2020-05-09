@@ -2,12 +2,12 @@ package com.example.sporttracker.Presenters;
 
 import android.os.Bundle;
 
-import com.example.sporttracker.Models.Activities;
-import com.example.sporttracker.Models.ActivityRecordModel;
+import com.example.sporttracker.Models.Enumerations.Activities;
+import com.example.sporttracker.Models.ExerciseRecordModel;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.ExerciseRecordsRepository;
-import com.example.sporttracker.Services.PreferencesRepository;
-import com.example.sporttracker.Views.ExerciseRecordDetailsActivity;
+import com.example.sporttracker.Services.Repositories.Databases.ActivitiesDatabase.ExerciseRecordsRepository;
+import com.example.sporttracker.Services.Repositories.PreferencesRepository;
+import com.example.sporttracker.Views.Activities.ExerciseRecordDetailsActivity;
 
 public class ExerciseRecordDetailsPresenter {
 
@@ -35,7 +35,7 @@ public class ExerciseRecordDetailsPresenter {
 
     public void viewIsReady() {
         repository.open();
-        ActivityRecordModel recordModel = (ActivityRecordModel) repository.getElement(id);
+        ExerciseRecordModel recordModel = (ExerciseRecordModel) repository.getElement(id);
         repository.close();
 
         float calories = Activities.RUN.getCalories(recordModel.getDistance()
