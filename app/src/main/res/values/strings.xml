@@ -46,4 +46,5 @@
     <string name="all_distance">Общая дистанция</string>
     <string name="all_calories">Всего калорий</string>
     <string name="all_duration">Общая продолжительность</string>
+    <string name="steps">Шаги</string>
 </resources>
