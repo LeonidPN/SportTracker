@@ -69,7 +69,13 @@ public class StepCounterService extends Service implements SensorEventListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        onStartCommand(null, 0, 0);
+        startService(new Intent(this, StepCounterService.class));
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        super.onTaskRemoved(rootIntent);
+        startService(new Intent(this, StepCounterService.class));
     }
 
     @Override
@@ -85,6 +91,7 @@ public class StepCounterService extends Service implements SensorEventListener {
         Calendar today = Calendar.getInstance();
 
         boolean flagHour = false;
+        boolean flagListEmpty = false;
 
         int delta = 0;
 
@@ -100,12 +107,17 @@ public class StepCounterService extends Service implements SensorEventListener {
                 flagHour = true;
             }
             stepCount = model.getCount();
+        } else {
+            flagListEmpty = true;
         }
 
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
             int steps = (int) event.values[0];
+            if (flagListEmpty) {
+                preferences.setStepCountDelta(steps);
+            }
             if (flagHour) {
-                preferences.setStepCountDelta(delta);
+                preferences.setStepCountDelta(preferences.getStepCountDelta() + delta);
             }
             if (steps < 25) {
                 preferences.setStepCountDelta(0);
