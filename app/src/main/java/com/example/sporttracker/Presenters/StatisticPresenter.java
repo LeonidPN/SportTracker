@@ -585,6 +585,21 @@ public class StatisticPresenter {
         return String.format("%.1f", calories) + " ккал";
     }
 
+    public int getAxisMaximum(int maxValue) {
+        int digits = 0;
+        int lastDigit = 0;
+        while (maxValue > 0) {
+            lastDigit = maxValue % 10;
+            digits++;
+            maxValue /= 10;
+        }
+        if (digits > 0) {
+            return (lastDigit + 1) * (int) Math.pow(10, digits - 1);
+        } else {
+            return 150;
+        }
+    }
+
     private String getResourceString(int id) {
         return activity.getResources().getString(id);
     }

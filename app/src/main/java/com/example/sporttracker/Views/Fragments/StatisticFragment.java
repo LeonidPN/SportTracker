@@ -1,14 +1,13 @@
 package com.example.sporttracker.Views.Fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.sporttracker.Presenters.StatisticPresenter;
 import com.example.sporttracker.R;
@@ -67,7 +66,6 @@ public class StatisticFragment extends Fragment {
 
         chart.getDescription().setEnabled(false);
         chart.getAxisLeft().setAxisMinimum(0);
-        chart.getAxisLeft().setAxisMaximum(150);
         chart.getAxisRight().setEnabled(false);
         chart.getLegend().setEnabled(false);
         chart.setMaxVisibleValueCount(0);
@@ -88,6 +86,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setWeek();
 
                         chart.setData(presenter.getWeekData());
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -112,6 +111,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setMonth();
 
                         chart.setData(presenter.getMonthData());
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -136,6 +136,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setYear();
 
                         chart.setData(presenter.getYearData());
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -160,6 +161,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setAll();
 
                         chart.setData(presenter.getAllData());
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -191,6 +193,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setWeek();
 
                         chart.setData(presenter.getWeekData());
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -215,6 +218,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setMonth();
 
                         chart.setData(presenter.getMonthData());
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -239,6 +243,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setYear();
 
                         chart.setData(presenter.getYearData());
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -263,6 +268,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setAll();
 
                         chart.setData(presenter.getAllData());
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -288,6 +294,7 @@ public class StatisticFragment extends Fragment {
             presenter.setWeek();
 
             chart.setData(presenter.getWeekData());
+            chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
             chart.invalidate();
 
             ValueFormatter formatter = new ValueFormatter() {
@@ -322,6 +329,7 @@ public class StatisticFragment extends Fragment {
             presenter.setMonth();
 
             chart.setData(presenter.getMonthData());
+            chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
 
             chart.invalidate();
 
@@ -356,6 +364,7 @@ public class StatisticFragment extends Fragment {
             presenter.setYear();
 
             chart.setData(presenter.getYearData());
+            chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
             chart.invalidate();
 
             ValueFormatter formatter = new ValueFormatter() {
@@ -390,6 +399,7 @@ public class StatisticFragment extends Fragment {
             presenter.setAll();
 
             chart.setData(presenter.getAllData());
+            chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
 
             chart.invalidate();
 
