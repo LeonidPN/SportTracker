@@ -222,7 +222,7 @@ public class StatisticPresenter {
             weekDistance += distance;
             weekDuration += duration;
             weekDurationInMilis += durationInMilis;
-            entries.add(new BarEntry(i, distance));
+            entries.add(new BarEntry(i, distance / 1000));
         }
 
         BarDataSet dataset = new BarDataSet(entries, getResourceString(R.string.distance));
@@ -267,7 +267,7 @@ public class StatisticPresenter {
             monthDistance += distance;
             monthDuration += duration;
             monthDurationInMilis += durationInMilis;
-            entries.add(new BarEntry(i, distance));
+            entries.add(new BarEntry(i, distance / 1000));
         }
 
         BarDataSet dataset = new BarDataSet(entries, getResourceString(R.string.distance));
@@ -312,7 +312,7 @@ public class StatisticPresenter {
             yearDistance += distance;
             yearDuration += duration;
             yearDurationInMilis += durationInMilis;
-            entries.add(new BarEntry(i, distance));
+            entries.add(new BarEntry(i, distance / 1000));
         }
 
         BarDataSet dataset = new BarDataSet(entries, getResourceString(R.string.distance));
@@ -352,7 +352,7 @@ public class StatisticPresenter {
             allDistance += distance;
             allDuration += duration;
             allDurationInMilis += durationInMilis;
-            entries.add(new BarEntry(i, distance));
+            entries.add(new BarEntry(i, distance / 1000));
         }
 
         BarDataSet dataset = new BarDataSet(entries, getResourceString(R.string.distance));
@@ -450,35 +450,35 @@ public class StatisticPresenter {
     }
 
     public String getWeekDistance() {
-        return weekDistance + " м";
+        return (weekDistance / 1000) + " " + getResourceString(R.string.kilometers_abbreviation);
     }
 
     public String getMonthDistance() {
-        return monthDistance + " м";
+        return (monthDistance / 1000) + " " + getResourceString(R.string.kilometers_abbreviation);
     }
 
     public String getYearDistance() {
-        return yearDistance + " м";
+        return (yearDistance / 1000) + " " + getResourceString(R.string.kilometers_abbreviation);
     }
 
     public String getAllDistance() {
-        return allDistance + " м";
+        return (allDistance / 1000) + " " + getResourceString(R.string.kilometers_abbreviation);
     }
 
     public String getWeekDuration() {
-        return weekDuration + " мин";
+        return weekDuration + " " + getResourceString(R.string.minutes_abbreviation);
     }
 
     public String getMonthDuration() {
-        return monthDuration + " мин";
+        return monthDuration + " " + getResourceString(R.string.minutes_abbreviation);
     }
 
     public String getYearDuration() {
-        return yearDuration + " мин";
+        return yearDuration + " " + getResourceString(R.string.minutes_abbreviation);
     }
 
     public String getAllDuration() {
-        return allDuration + " мин";
+        return allDuration + " " + getResourceString(R.string.minutes_abbreviation);
     }
 
     public String getWeekCalories() {
@@ -486,7 +486,7 @@ public class StatisticPresenter {
         float distance = weekDistance;
         long time = weekDurationInMilis;
         if (time == 0) {
-            return String.format("%.1f", 0.0f) + " ккал";
+            return String.format("%.1f", 0.0f) + " " + getResourceString(R.string.calories_abbreviation);
         }
         if (activity.getExercise().equals(Activities.RUN.getName())) {
             calories = Activities.RUN.getCalories(distance / (float) time / 1000 * 3600)
@@ -504,7 +504,7 @@ public class StatisticPresenter {
             calories = Activities.WALK.getCalories(distance / (float) time / 1000 * 3600)
                     * time * Float.parseFloat(preferences.getWeight());
         }
-        return String.format("%.1f", calories) + " ккал";
+        return String.format("%.1f", calories) + " " + getResourceString(R.string.calories_abbreviation);
     }
 
     public String getMonthCalories() {
@@ -512,7 +512,7 @@ public class StatisticPresenter {
         float distance = monthDistance;
         long time = monthDurationInMilis;
         if (time == 0) {
-            return String.format("%.1f", 0.0f) + " ккал";
+            return String.format("%.1f", 0.0f) + " " + getResourceString(R.string.calories_abbreviation);
         }
         if (activity.getExercise().equals(Activities.RUN.getName())) {
             calories = Activities.RUN.getCalories(distance / (float) time / 1000 * 3600)
@@ -530,7 +530,7 @@ public class StatisticPresenter {
             calories = Activities.WALK.getCalories(distance / (float) time / 1000 * 3600)
                     * time * Float.parseFloat(preferences.getWeight());
         }
-        return String.format("%.1f", calories) + " ккал";
+        return String.format("%.1f", calories) + " " + getResourceString(R.string.calories_abbreviation);
     }
 
     public String getYearCalories() {
@@ -538,7 +538,7 @@ public class StatisticPresenter {
         float distance = yearDistance;
         long time = yearDurationInMilis;
         if (time == 0) {
-            return String.format("%.1f", 0.0f) + " ккал";
+            return String.format("%.1f", 0.0f) + " " + getResourceString(R.string.calories_abbreviation);
         }
         if (activity.getExercise().equals(Activities.RUN.getName())) {
             calories = Activities.RUN.getCalories(distance / (float) time / 1000 * 3600)
@@ -556,7 +556,7 @@ public class StatisticPresenter {
             calories = Activities.WALK.getCalories(distance / (float) time / 1000 * 3600)
                     * time * Float.parseFloat(preferences.getWeight());
         }
-        return String.format("%.1f", calories) + " ккал";
+        return String.format("%.1f", calories) + " " + getResourceString(R.string.calories_abbreviation);
     }
 
     public String getAllCalories() {
@@ -564,7 +564,7 @@ public class StatisticPresenter {
         float distance = allDistance;
         long time = allDurationInMilis;
         if (time == 0) {
-            return String.format("%.1f", 0.0f) + " ккал";
+            return String.format("%.1f", 0.0f) + " " + getResourceString(R.string.calories_abbreviation);
         }
         if (activity.getExercise().equals(Activities.RUN.getName())) {
             calories = Activities.RUN.getCalories(distance / (float) time / 1000 * 3600)
@@ -582,21 +582,26 @@ public class StatisticPresenter {
             calories = Activities.WALK.getCalories(distance / (float) time / 1000 * 3600)
                     * time * Float.parseFloat(preferences.getWeight());
         }
-        return String.format("%.1f", calories) + " ккал";
+        return String.format("%.1f", calories) + " " + getResourceString(R.string.calories_abbreviation);
     }
 
-    public int getAxisMaximum(int maxValue) {
-        int digits = 0;
-        int lastDigit = 0;
-        while (maxValue > 0) {
-            lastDigit = maxValue % 10;
-            digits++;
-            maxValue /= 10;
-        }
-        if (digits > 0) {
-            return (lastDigit + 1) * (int) Math.pow(10, digits - 1);
+    public int getAxisMaximum(float max) {
+        if (max == 0) {
+            return 20;
         } else {
-            return 150;
+            int maxValue = (int) max;
+            int digits = 0;
+            int lastDigit = 0;
+            while (maxValue > 0) {
+                lastDigit = maxValue % 10;
+                digits++;
+                maxValue /= 10;
+            }
+            if (digits > 0) {
+                return (lastDigit + 1) * (int) Math.pow(10, digits - 1);
+            } else {
+                return 1;
+            }
         }
     }
 

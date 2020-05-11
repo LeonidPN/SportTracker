@@ -86,7 +86,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setWeek();
 
                         chart.setData(presenter.getWeekData());
-                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum(chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -111,7 +111,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setMonth();
 
                         chart.setData(presenter.getMonthData());
-                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum(chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -136,7 +136,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setYear();
 
                         chart.setData(presenter.getYearData());
-                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum(chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -161,7 +161,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setAll();
 
                         chart.setData(presenter.getAllData());
-                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum(chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -193,7 +193,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setWeek();
 
                         chart.setData(presenter.getWeekData());
-                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum(chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -218,7 +218,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setMonth();
 
                         chart.setData(presenter.getMonthData());
-                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum(chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -243,7 +243,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setYear();
 
                         chart.setData(presenter.getYearData());
-                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum(chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -268,7 +268,7 @@ public class StatisticFragment extends Fragment {
                         presenter.setAll();
 
                         chart.setData(presenter.getAllData());
-                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
+                        chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum(chart.getYMax()));
                         chart.invalidate();
 
                         chart.highlightValue(0, -1);
@@ -294,7 +294,7 @@ public class StatisticFragment extends Fragment {
             presenter.setWeek();
 
             chart.setData(presenter.getWeekData());
-            chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
+            chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum(chart.getYMax()));
             chart.invalidate();
 
             ValueFormatter formatter = new ValueFormatter() {
@@ -310,13 +310,15 @@ public class StatisticFragment extends Fragment {
                 @Override
                 public void onValueSelected(Entry e, Highlight h) {
                     textViewCurrentDate.setText(presenter.getDayInWeek((int) e.getX()));
-                    textViewCurrentDistance.setText(e.getY() + " м");
+                    textViewCurrentDistance.setText(e.getY() + " " + getResources()
+                            .getString(R.string.kilometers_abbreviation));
                 }
 
                 @Override
                 public void onNothingSelected() {
                     textViewCurrentDate.setText("-");
-                    textViewCurrentDistance.setText("-- м");
+                    textViewCurrentDistance.setText("--" + " " + getResources()
+                            .getString(R.string.kilometers_abbreviation));
                 }
             });
 
@@ -329,7 +331,7 @@ public class StatisticFragment extends Fragment {
             presenter.setMonth();
 
             chart.setData(presenter.getMonthData());
-            chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
+            chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum(chart.getYMax()));
 
             chart.invalidate();
 
@@ -345,13 +347,15 @@ public class StatisticFragment extends Fragment {
                 @Override
                 public void onValueSelected(Entry e, Highlight h) {
                     textViewCurrentDate.setText(presenter.getDayInMonth((int) e.getX()));
-                    textViewCurrentDistance.setText(e.getY() + " м");
+                    textViewCurrentDistance.setText(e.getY() + " " + getResources()
+                            .getString(R.string.kilometers_abbreviation));
                 }
 
                 @Override
                 public void onNothingSelected() {
                     textViewCurrentDate.setText("-");
-                    textViewCurrentDistance.setText("-- м");
+                    textViewCurrentDistance.setText("--" + " " + getResources()
+                            .getString(R.string.kilometers_abbreviation));
                 }
             });
 
@@ -364,7 +368,7 @@ public class StatisticFragment extends Fragment {
             presenter.setYear();
 
             chart.setData(presenter.getYearData());
-            chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
+            chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum(chart.getYMax()));
             chart.invalidate();
 
             ValueFormatter formatter = new ValueFormatter() {
@@ -380,13 +384,15 @@ public class StatisticFragment extends Fragment {
                 @Override
                 public void onValueSelected(Entry e, Highlight h) {
                     textViewCurrentDate.setText(presenter.getMonthInYear((int) e.getX()));
-                    textViewCurrentDistance.setText(e.getY() + " м");
+                    textViewCurrentDistance.setText(e.getY() + " " + getResources()
+                            .getString(R.string.kilometers_abbreviation));
                 }
 
                 @Override
                 public void onNothingSelected() {
                     textViewCurrentDate.setText("-");
-                    textViewCurrentDistance.setText("-- м");
+                    textViewCurrentDistance.setText("--" + " " + getResources()
+                            .getString(R.string.kilometers_abbreviation));
                 }
             });
 
@@ -399,7 +405,7 @@ public class StatisticFragment extends Fragment {
             presenter.setAll();
 
             chart.setData(presenter.getAllData());
-            chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum((int) chart.getYMax()));
+            chart.getAxisLeft().setAxisMaximum(presenter.getAxisMaximum(chart.getYMax()));
 
             chart.invalidate();
 
@@ -415,13 +421,15 @@ public class StatisticFragment extends Fragment {
                 @Override
                 public void onValueSelected(Entry e, Highlight h) {
                     textViewCurrentDate.setText(presenter.getYearInAll((int) e.getX()));
-                    textViewCurrentDistance.setText(e.getY() + " м");
+                    textViewCurrentDistance.setText(e.getY() + " " + getResources()
+                            .getString(R.string.kilometers_abbreviation));
                 }
 
                 @Override
                 public void onNothingSelected() {
                     textViewCurrentDate.setText("-");
-                    textViewCurrentDistance.setText("-- м");
+                    textViewCurrentDistance.setText("--" + " " + getResources()
+                            .getString(R.string.kilometers_abbreviation));
                 }
             });
 

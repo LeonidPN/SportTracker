@@ -47,4 +47,9 @@
     <string name="all_calories">Всего калорий</string>
     <string name="all_duration">Общая продолжительность</string>
     <string name="steps">Шаги</string>
+    <string name="meters_abbreviation">м</string>
+    <string name="santimeters_abbreviation">см</string>
+    <string name="kilometers_abbreviation">км</string>
+    <string name="minutes_abbreviation">мин</string>
+    <string name="calories_abbreviation">ккал</string>
 </resources>
