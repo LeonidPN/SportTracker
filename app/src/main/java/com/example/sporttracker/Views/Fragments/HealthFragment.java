@@ -13,11 +13,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.sporttracker.Presenters.HealthPresenter;
 import com.example.sporttracker.R;
-import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 import com.example.sporttracker.Services.Repositories.Databases.StepsDatabase.StepsRecordsRepository;
+import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 import com.example.sporttracker.Views.Activities.AddExerciseRecordActivity;
 import com.example.sporttracker.Views.Activities.ExerciseRecordsActivity;
 import com.example.sporttracker.Views.Activities.StatisticActivity;
+import com.example.sporttracker.Views.Activities.WeightActivity;
 
 public class HealthFragment extends Fragment {
 
@@ -67,7 +68,7 @@ public class HealthFragment extends Fragment {
         textView6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AddExerciseRecordActivity.class);
+                Intent intent = new Intent(v.getContext(), WeightActivity.class);
                 v.getContext().startActivity(intent);
             }
         });

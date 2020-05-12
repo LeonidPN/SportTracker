@@ -7,7 +7,8 @@
     <string name="date">Дата</string>
     <string name="comment">Комментарий</string>
     <string name="distance">Дистанция</string>
-    <string name="time">Продолжительность</string>
+    <string name="duration">Продолжительность</string>
+    <string name="time">Время</string>
     <string name="title_add_exercise_record">Добавление записи</string>
     <string name="ok">Ок</string>
     <string name="save">Сохранить</string>
@@ -17,10 +18,13 @@
     <string name="choose_date">Укажите дату</string>
     <string name="choose_distance">Укажите дистанцию</string>
     <string name="choose_duration">Укажите продолжительность</string>
+    <string name="choose_weight">Укажите вес</string>
     <string name="add_record">Добавить запись</string>
+    <string name="history">История</string>
     <string name="statistics">Статистика</string>
     <string name="profile">Профиль</string>
     <string name="goals">Цели</string>
+    <string name="set_goal"><u>Настроить цель</u></string>
     <string name="preferences">Настройки</string>
     <string name="about">О приложении</string>
     <string name="arrow">Стрелка</string>
@@ -29,7 +33,7 @@
     <string name="height">Рост</string>
     <string name="weight">Вес</string>
     <string name="sex_default_value">Не указан</string>
-    <string name="date_of_birth_default_value">August 1, 1990</string>
+    <string name="date_of_birth_default_value">Август 1, 1990</string>
     <string name="height_default_value">170</string>
     <string name="weight_default_value">60</string>
     <string name="male">Мужской</string>
@@ -39,6 +43,7 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="id">id</string>
+    <string name="day">День</string>
     <string name="week">Неделя</string>
     <string name="month">Месяц</string>
     <string name="year">Год</string>
@@ -52,4 +57,8 @@
     <string name="kilometers_abbreviation">км</string>
     <string name="minutes_abbreviation">мин</string>
     <string name="calories_abbreviation">ккал</string>
+    <string name="kilogram_abbreviation">кг</string>
+    <string name="start">Начало: </string>
+    <string name="goal">Цель: </string>
+    <string name="period_change">Изменение за период</string>
 </resources>

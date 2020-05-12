@@ -2,18 +2,17 @@ package com.example.sporttracker.Views.Adapters;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatisticFragmentPagerAdapter extends FragmentPagerAdapter {
+public class SimpleFragmentPagerAdapter extends androidx.fragment.app.FragmentPagerAdapter {
 
     private final List<Fragment> fragmentList = new ArrayList<>();
 
     private final List<String> fragmentTitleList = new ArrayList<>();
 
-    public StatisticFragmentPagerAdapter(FragmentManager fm) {
+    public SimpleFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 

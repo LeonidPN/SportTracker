@@ -18,6 +18,7 @@ public class PreferencesRepository {
     private static final String STEP_COUNT_DELTA_KEY = "step_count_delta";
     private static final String WEIGHT_GOAL_KEY = "weight_goal";
     private static final String STEPS_GOAL_KEY = "steps_goal";
+    private static final String WEIGHT_START_KEY = "weight_start";
 
     private SharedPreferences settings;
 
@@ -106,6 +107,8 @@ public class PreferencesRepository {
     public void setWeightGoal(int weight) {
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt(WEIGHT_GOAL_KEY, weight);
+        editor.putString(WEIGHT_START_KEY,
+                settings.getString(WEIGHT_KEY, getResourceString(R.string.weight_default_value)));
         editor.apply();
     }
 
@@ -117,6 +120,10 @@ public class PreferencesRepository {
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt(STEPS_GOAL_KEY, steps);
         editor.apply();
+    }
+
+    public String getStartWeight() {
+        return settings.getString(WEIGHT_START_KEY, getResourceString(R.string.weight_default_value));
     }
 
     private String getResourceString(int id) {

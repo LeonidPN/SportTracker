@@ -1,8 +1,5 @@
 package com.example.sporttracker.Views.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +8,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.sporttracker.Models.Enumerations.Activities;
 import com.example.sporttracker.Presenters.StatisticPresenter;
 import com.example.sporttracker.R;
 import com.example.sporttracker.Services.Repositories.Databases.ActivitiesDatabase.ExerciseRecordsRepository;
 import com.example.sporttracker.Services.Repositories.PreferencesRepository;
-import com.example.sporttracker.Views.Adapters.StatisticFragmentPagerAdapter;
+import com.example.sporttracker.Views.Adapters.SimpleFragmentPagerAdapter;
 import com.example.sporttracker.Views.Fragments.StatisticFragment;
 import com.google.android.material.tabs.TabLayout;
 
@@ -57,7 +57,7 @@ public class StatisticActivity extends AppCompatActivity {
             }
         });
 
-        StatisticFragmentPagerAdapter adapter = new StatisticFragmentPagerAdapter(getSupportFragmentManager());
+        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager());
         presenter.updateRecordsList();
         adapter.addFragment(new StatisticFragment(R.string.week, presenter), getString(R.string.week));
         adapter.addFragment(new StatisticFragment(R.string.month, presenter), getString(R.string.month));
@@ -83,7 +83,7 @@ public class StatisticActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 exercise = parent.getItemAtPosition(position).toString();
                 presenter.updateRecordsList();
-                StatisticFragmentPagerAdapter adapter = new StatisticFragmentPagerAdapter(getSupportFragmentManager());
+                SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager());
                 presenter.updateRecordsList();
                 adapter.addFragment(new StatisticFragment(R.string.week, presenter), getString(R.string.week));
                 adapter.addFragment(new StatisticFragment(R.string.month, presenter), getString(R.string.month));
