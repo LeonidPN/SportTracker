@@ -1,6 +1,8 @@
 package com.example.sporttracker.Views.Activities;
 
 import android.Manifest;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -51,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_CODE_PERMISSION_ACCESS_COARSE_LOCATION);
         }
 
-        startService(new Intent(this, StepCounterService.class));
+        if (!isServiceRunning(StepCounterService.class)) {
+            startService(new Intent(this, StepCounterService.class));
+        }
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
@@ -89,5 +93,15 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return;
         }
+    }
+
+    private boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.sporttracker.Services.StepManagers;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -10,14 +12,24 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+
 import com.example.sporttracker.Models.StepsRecordModel;
+import com.example.sporttracker.R;
 import com.example.sporttracker.Services.Repositories.Databases.StepsDatabase.StepsRecordsRepository;
 import com.example.sporttracker.Services.Repositories.PreferencesRepository;
+import com.example.sporttracker.Views.Activities.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.function.Predicate;
 
 public class StepCounterService extends Service implements SensorEventListener {
+
+    private static final int NOTIFY_ID = 101;
+
+    private static String CHANNEL_ID = "step_counter_channel";
 
     private StepsRecordsRepository repository;
 
@@ -63,19 +75,55 @@ public class StepCounterService extends Service implements SensorEventListener {
             //Нет необходимых сенсоров
         }
 
+        updateNotification(0);
+
         return Service.START_STICKY;
+    }
+
+    private void updateNotification(int stepCount) {
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this,
+                0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        String steps = "";
+
+        if (stepCount == 0) {
+            steps = getResources().getString(R.string.steps_notify_abbreviation_3);
+        } else if (stepCount % 10 == 1) {
+            steps = getResources().getString(R.string.steps_notify_abbreviation_1);
+        } else if (stepCount % 10 == 2 || stepCount % 10 == 3 || stepCount % 10 == 4) {
+            steps = getResources().getString(R.string.steps_notify_abbreviation_2);
+        } else if (stepCount % 100 < 21) {
+            steps = getResources().getString(R.string.steps_notify_abbreviation_3);
+        } else {
+            steps = getResources().getString(R.string.steps_notify_abbreviation_3);
+        }
+
+        steps = stepCount + " " + steps;
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setOnlyAlertOnce(true)
+                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                .setContentTitle(getResources().getString(R.string.app_name))
+                .setContentText(steps)
+                .setAutoCancel(false)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setContentIntent(contentIntent)
+                .setColor(ContextCompat.getColor(this, R.color.colorAccent));
+
+        Notification notification = builder.build();
+
+        startForeground(NOTIFY_ID, notification);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        startService(new Intent(this, StepCounterService.class));
     }
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
         super.onTaskRemoved(rootIntent);
-        startService(new Intent(this, StepCounterService.class));
     }
 
     @Override
@@ -153,6 +201,29 @@ public class StepCounterService extends Service implements SensorEventListener {
         }
 
         repository.close();
+
+        list.removeIf(new Predicate<StepsRecordModel>() {
+            @Override
+            public boolean test(StepsRecordModel n) {
+                Calendar today = Calendar.getInstance();
+
+                Calendar recordDate = Calendar.getInstance();
+                recordDate.setTime(n.getDate());
+
+                return (today.get(Calendar.YEAR) != recordDate.get(Calendar.YEAR) ||
+                        today.get(Calendar.DAY_OF_YEAR) != recordDate.get(Calendar.DAY_OF_YEAR));
+            }
+        });
+
+        int count = 0;
+
+        if (list.size() > 0) {
+            for (StepsRecordModel m : list) {
+                count += m.getCount();
+            }
+        }
+
+        updateNotification(count);
 
     }
 
