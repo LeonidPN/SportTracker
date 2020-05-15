@@ -21,6 +21,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_PERMISSION_ACTIVITY_RECOGNITION = 1;
+    private static final int REQUEST_CODE_PERMISSION_ACCESS_FINE_LOCATION = 2;
+    private static final int REQUEST_CODE_PERMISSION_ACCESS_COARSE_LOCATION = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +30,25 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        int permissionStatus = ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION);
-
-        if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
+        int permissionStatusActivityRecognition = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACTIVITY_RECOGNITION);
+        if (permissionStatusActivityRecognition != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACTIVITY_RECOGNITION},
                     REQUEST_CODE_PERMISSION_ACTIVITY_RECOGNITION);
         }
 
-        permissionStatus = ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION);
+        int permissionStatusAccessFineLocation = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+        if (permissionStatusAccessFineLocation != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_CODE_PERMISSION_ACCESS_FINE_LOCATION);
+        }
 
-        if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
-            finish();
+        int permissionStatusAccessCoarseLocation = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION);
+        if (permissionStatusAccessCoarseLocation != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    REQUEST_CODE_PERMISSION_ACCESS_COARSE_LOCATION);
         }
 
         startService(new Intent(this, StepCounterService.class));
@@ -47,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
+
     }
 
     @Override
@@ -54,10 +65,27 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case REQUEST_CODE_PERMISSION_ACTIVITY_RECOGNITION:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (permissions.length == 1 &&
+                        permissions[0] == Manifest.permission.ACTIVITY_RECOGNITION &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 } else {
-                    finish();
+                    //finish();
+                }
+                return;
+            case REQUEST_CODE_PERMISSION_ACCESS_FINE_LOCATION:
+                if (permissions.length == 1 &&
+                        permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                } else {
+                    //finish();
+                }
+                return;
+            case REQUEST_CODE_PERMISSION_ACCESS_COARSE_LOCATION:
+                if (permissions.length == 1 &&
+                        permissions[0] == Manifest.permission.ACCESS_COARSE_LOCATION &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                } else {
+                    //finish();
                 }
                 return;
         }

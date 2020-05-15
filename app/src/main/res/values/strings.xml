@@ -61,4 +61,7 @@
     <string name="start">Начало: </string>
     <string name="goal">Цель: </string>
     <string name="period_change">Изменение за период</string>
+    <string name="navigation_settings_question">Средства определения местоположения недоступны. Перейти в настройки для их включения?</string>
+    <string name="end_exercise_question">Вы уверены, что хотите завершить упражнение?</string>
+    <string name="end_exercise_little_distance_question">Дистанция слишком мала. Вы уверены, что хотите завершить упражнение?</string>
 </resources>
