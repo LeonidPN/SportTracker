@@ -77,11 +77,14 @@ public class ExerciseMapPresenter {
 
     @SuppressLint("MissingPermission")
     public void setLocationManager() {
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                1000, 1, locationListener);
-        locationManager.requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER, 1000, 1,
-                locationListener);
+        checkEnabled();
+        if (enabledGPS) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                    1000, 1, locationListener);
+        } else if (enabledNet) {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                    1000, 1, locationListener);
+        }
     }
 
     public void clearLocationManager() {

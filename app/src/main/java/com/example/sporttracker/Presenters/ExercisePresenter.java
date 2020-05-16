@@ -131,11 +131,14 @@ public class ExercisePresenter {
 
     @SuppressLint("MissingPermission")
     public void setLocationManager() {
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                1000 * 20, 2, locationListener);
-        locationManager.requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER, 1000 * 20, 2,
-                locationListener);
+        checkEnabled();
+        if (enabledGPS) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                    1000 * 20, 2, locationListener);
+        } else if (enabledNet) {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                    1000 * 20, 2, locationListener);
+        }
     }
 
     public void clearLocationManager() {
@@ -189,7 +192,7 @@ public class ExercisePresenter {
         alertDialog.create().show();
     }
 
-    public void checkEnabled() {
+    private void checkEnabled() {
         enabledGPS = locationManager
                 .isProviderEnabled(LocationManager.GPS_PROVIDER);
         enabledNet = locationManager

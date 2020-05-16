@@ -167,6 +167,8 @@ public class ExercisesMapActivity extends AppCompatActivity implements OnMapRead
     public void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+
+        presenter.clearLocationManager();
     }
 
     @Override

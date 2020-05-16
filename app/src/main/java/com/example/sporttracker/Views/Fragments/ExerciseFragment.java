@@ -182,6 +182,7 @@ public class ExerciseFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
+        this.googleMap.setMyLocationEnabled(true);
         UiSettings uiSettings = this.googleMap.getUiSettings();
         uiSettings.setMyLocationButtonEnabled(false);
         uiSettings.setRotateGesturesEnabled(false);
@@ -194,7 +195,6 @@ public class ExerciseFragment extends Fragment implements OnMapReadyCallback {
         if (location == null) {
             return;
         }
-        googleMap.setMyLocationEnabled(true);
         LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, googleMap.getMaxZoomLevel() - 4f));
     }
