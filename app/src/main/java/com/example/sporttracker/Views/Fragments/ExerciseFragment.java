@@ -1,7 +1,8 @@
 package com.example.sporttracker.Views.Fragments;
 
-import android.annotation.SuppressLint;
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -32,6 +34,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class ExerciseFragment extends Fragment implements OnMapReadyCallback {
 
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
+
+    private static final int REQUEST_CODE_PERMISSION_ACCESS_FINE_LOCATION = 1;
 
     private ExercisePresenter presenter;
 
@@ -68,7 +72,14 @@ public class ExerciseFragment extends Fragment implements OnMapReadyCallback {
         presenter.viewIsReady();
 
         mapView.onCreate(savedInstanceState);
+
+        checkPermissions();
+
         mapView.getMapAsync(this);
+
+        presenter.initLocationManager();
+
+        presenter.setLocationManager();
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,8 +89,6 @@ public class ExerciseFragment extends Fragment implements OnMapReadyCallback {
         });
 
         presenter.setNavController(NavHostFragment.findNavController(this));
-
-        presenter.initLocationManager();
 
         return root;
     }
@@ -128,12 +137,11 @@ public class ExerciseFragment extends Fragment implements OnMapReadyCallback {
         mapView.onSaveInstanceState(mapViewBundle);
     }
 
-    @SuppressLint("MissingPermission")
     @Override
     public void onResume() {
         super.onResume();
 
-        presenter.setLocationManager();
+        checkPermissions();
 
         if (exercise.equals(Activities.WALK.getName())) {
             textViewAllExerciseDistance.setText(presenter.getAllWalkDistance());
@@ -164,13 +172,13 @@ public class ExerciseFragment extends Fragment implements OnMapReadyCallback {
     public void onPause() {
         super.onPause();
         mapView.onPause();
-        presenter.clearLocationManager();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+        presenter.clearLocationManager();
     }
 
     @Override
@@ -197,6 +205,43 @@ public class ExerciseFragment extends Fragment implements OnMapReadyCallback {
         }
         LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, googleMap.getMaxZoomLevel() - 4f));
+    }
+
+    public void checkPermissions() {
+        int permissionStatusAccessFineLocation = ContextCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (permissionStatusAccessFineLocation != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_CODE_PERMISSION_ACCESS_FINE_LOCATION);
+        } else {
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_CODE_PERMISSION_ACCESS_FINE_LOCATION:
+                for (int i = 0; i < permissions.length; i++) {
+                    String permission = permissions[i];
+                    int grantResult = grantResults[i];
+
+                    if (permission.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                        if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                            mapView.getMapAsync(this);
+
+                            presenter.initLocationManager();
+
+                            presenter.setLocationManager();
+                        } else {
+                            NavHostFragment.findNavController(this).navigate(R.id.navigation_health);
+                        }
+                    }
+                }
+                break;
+        }
     }
 
     public Context getContext() {

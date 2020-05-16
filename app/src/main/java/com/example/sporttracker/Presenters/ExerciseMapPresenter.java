@@ -77,12 +77,13 @@ public class ExerciseMapPresenter {
 
     @SuppressLint("MissingPermission")
     public void setLocationManager() {
+        activity.checkPermissions();
         checkEnabled();
-        if (enabledGPS) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    1000, 1, locationListener);
-        } else if (enabledNet) {
+        if (enabledNet) {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                    1000, 1, locationListener);
+        } else if (enabledGPS) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                     1000, 1, locationListener);
         }
     }
@@ -146,7 +147,13 @@ public class ExerciseMapPresenter {
         public void onLocationChanged(Location location) {
             checkEnabled();
             if (lastLocation != null) {
-                distance += lastLocation.distanceTo(location);
+                float dist = lastLocation.distanceTo(location);
+                if (dist < 10) {
+                    distance += dist;
+                    activity.setLocation(location);
+                    listLatLng.add(new LatLng(location.getLatitude(), location.getLongitude()));
+                    polyline.setPoints(listLatLng);
+                }
             } else {
                 lastLocation = location;
             }
@@ -163,6 +170,7 @@ public class ExerciseMapPresenter {
         @SuppressLint("MissingPermission")
         @Override
         public void onProviderEnabled(String provider) {
+            activity.checkPermissions();
             checkEnabled();
             Location location = locationManager.getLastKnownLocation(provider);
             if (lastLocation != null) {

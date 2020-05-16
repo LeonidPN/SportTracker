@@ -1,13 +1,18 @@
 package com.example.sporttracker.Views.Activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.sporttracker.Presenters.ExerciseMapPresenter;
 import com.example.sporttracker.R;
@@ -26,6 +31,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class ExercisesMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
+
+    private static final int REQUEST_CODE_PERMISSION_ACCESS_FINE_LOCATION = 1;
 
     private ExerciseMapPresenter presenter;
 
@@ -197,6 +204,37 @@ public class ExercisesMapActivity extends AppCompatActivity implements OnMapRead
 
     public Polyline setPolyline(PolylineOptions polylineOptions) {
         return googleMap.addPolyline(polylineOptions);
+    }
+
+    public void checkPermissions() {
+        int permissionStatusAccessFineLocation = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (permissionStatusAccessFineLocation != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_CODE_PERMISSION_ACCESS_FINE_LOCATION);
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_CODE_PERMISSION_ACCESS_FINE_LOCATION:
+                for (int i = 0; i < permissions.length; i++) {
+                    String permission = permissions[i];
+                    int grantResult = grantResults[i];
+
+                    if (permission.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                        if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                        } else {
+                            finish();
+                        }
+                    }
+                }
+                break;
+        }
     }
 
     public Context getContext() {

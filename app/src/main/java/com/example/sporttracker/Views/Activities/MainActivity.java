@@ -22,36 +22,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CODE_PERMISSION_ACTIVITY_RECOGNITION = 1;
-    private static final int REQUEST_CODE_PERMISSION_ACCESS_FINE_LOCATION = 2;
-    private static final int REQUEST_CODE_PERMISSION_ACCESS_COARSE_LOCATION = 3;
+    private static final int REQUEST_CODE_PERMISSION_ACTIVITY_RECOGNITION = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-
-        int permissionStatusActivityRecognition = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACTIVITY_RECOGNITION);
-        if (permissionStatusActivityRecognition != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACTIVITY_RECOGNITION},
-                    REQUEST_CODE_PERMISSION_ACTIVITY_RECOGNITION);
-        }
-
-        int permissionStatusAccessFineLocation = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-        if (permissionStatusAccessFineLocation != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    REQUEST_CODE_PERMISSION_ACCESS_FINE_LOCATION);
-        }
-
-        int permissionStatusAccessCoarseLocation = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION);
-        if (permissionStatusAccessCoarseLocation != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                    REQUEST_CODE_PERMISSION_ACCESS_COARSE_LOCATION);
-        }
 
         if (!isServiceRunning(StepCounterService.class)) {
             startService(new Intent(this, StepCounterService.class));
@@ -65,33 +42,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        int permissionStatusActivityRecognition = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACTIVITY_RECOGNITION);
+
+        if (permissionStatusActivityRecognition != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACTIVITY_RECOGNITION},
+                    REQUEST_CODE_PERMISSION_ACTIVITY_RECOGNITION);
+        }
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case REQUEST_CODE_PERMISSION_ACTIVITY_RECOGNITION:
-                if (permissions.length == 1 &&
-                        permissions[0] == Manifest.permission.ACTIVITY_RECOGNITION &&
-                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                } else {
-                    //finish();
+                for (int i = 0; i < permissions.length; i++) {
+                    String permission = permissions[i];
+                    int grantResult = grantResults[i];
+
+                    if (permission.equals(Manifest.permission.ACTIVITY_RECOGNITION)) {
+                        if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                        } else {
+                            finish();
+                        }
+                    }
                 }
-                return;
-            case REQUEST_CODE_PERMISSION_ACCESS_FINE_LOCATION:
-                if (permissions.length == 1 &&
-                        permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION &&
-                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                } else {
-                    //finish();
-                }
-                return;
-            case REQUEST_CODE_PERMISSION_ACCESS_COARSE_LOCATION:
-                if (permissions.length == 1 &&
-                        permissions[0] == Manifest.permission.ACCESS_COARSE_LOCATION &&
-                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                } else {
-                    //finish();
-                }
-                return;
+                break;
         }
     }
 

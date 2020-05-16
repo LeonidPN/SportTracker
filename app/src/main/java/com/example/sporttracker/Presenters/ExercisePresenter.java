@@ -131,6 +131,7 @@ public class ExercisePresenter {
 
     @SuppressLint("MissingPermission")
     public void setLocationManager() {
+        fragment.checkPermissions();
         checkEnabled();
         if (enabledGPS) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
@@ -161,6 +162,7 @@ public class ExercisePresenter {
         @SuppressLint("MissingPermission")
         @Override
         public void onProviderEnabled(String provider) {
+            fragment.checkPermissions();
             checkEnabled();
             fragment.showLocation(locationManager.getLastKnownLocation(provider));
         }
@@ -170,7 +172,7 @@ public class ExercisePresenter {
         }
     };
 
-    public void showLocationAllertDialog() {
+    public void showLocationAlertDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(fragment.getContext());
 
         alertDialog.setMessage(R.string.navigation_settings_question);
@@ -198,7 +200,7 @@ public class ExercisePresenter {
         enabledNet = locationManager
                 .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         if (!enabledGPS && !enabledNet) {
-            showLocationAllertDialog();
+            showLocationAlertDialog();
         }
     }
 
