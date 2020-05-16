@@ -3,8 +3,8 @@ package com.example.sporttracker.Presenters;
 import android.content.Intent;
 
 import com.example.sporttracker.Models.StepsRecordModel;
-import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 import com.example.sporttracker.Services.Repositories.Databases.StepsDatabase.StepsRecordsRepository;
+import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 import com.example.sporttracker.Views.Fragments.HealthFragment;
 
 import java.util.ArrayList;
@@ -58,10 +58,10 @@ public class HealthPresenter {
             }
         }
 
-        float distance = (Float.parseFloat(preferences.getHeight()) / 4 + 30) / 100 * count;
+        float distance = (Float.parseFloat(preferences.getHeight()) / 4 + 25) / 100 * count;
 
         float calories = 1f * Float.parseFloat(preferences.getWeight()) * count *
-                (Float.parseFloat(preferences.getHeight()) / 4 + 30) / 100000;
+                (Float.parseFloat(preferences.getHeight()) / 4 + 25) / 100000 / 2;
 
         fragment.updateViews(count, distance, calories);
     }

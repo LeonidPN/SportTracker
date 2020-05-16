@@ -67,4 +67,6 @@
     <string name="steps_notify_abbreviation_1">Шаг</string>
     <string name="steps_notify_abbreviation_2">Шага</string>
     <string name="steps_notify_abbreviation_3">Шагов</string>
+    <string name="average_in_month">в среднем в день за месяц</string>
+    <string name="all_steps">Всего шагов</string>
 </resources>

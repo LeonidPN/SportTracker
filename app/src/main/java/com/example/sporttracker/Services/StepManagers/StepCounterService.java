@@ -19,7 +19,7 @@ import com.example.sporttracker.Models.StepsRecordModel;
 import com.example.sporttracker.R;
 import com.example.sporttracker.Services.Repositories.Databases.StepsDatabase.StepsRecordsRepository;
 import com.example.sporttracker.Services.Repositories.PreferencesRepository;
-import com.example.sporttracker.Views.Activities.MainActivity;
+import com.example.sporttracker.Views.Activities.StepsStatisticActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -81,7 +81,7 @@ public class StepCounterService extends Service implements SensorEventListener {
     }
 
     private void updateNotification(int stepCount) {
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, StepsStatisticActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this,
                 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 

@@ -18,6 +18,7 @@ import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 import com.example.sporttracker.Views.Activities.AddExerciseRecordActivity;
 import com.example.sporttracker.Views.Activities.ExerciseRecordsActivity;
 import com.example.sporttracker.Views.Activities.StatisticActivity;
+import com.example.sporttracker.Views.Activities.StepsStatisticActivity;
 import com.example.sporttracker.Views.Activities.WeightActivity;
 
 public class HealthFragment extends Fragment {
@@ -29,6 +30,8 @@ public class HealthFragment extends Fragment {
     private TextView textViewSteps;
     private TextView textViewDistance;
     private TextView textViewCalories;
+
+    private View viewSteps;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,7 +47,16 @@ public class HealthFragment extends Fragment {
         textViewDistance = root.findViewById(R.id.textView_distance);
         textViewCalories = root.findViewById(R.id.textView_calories);
 
+        viewSteps = root.findViewById(R.id.view_steps);
+
         presenter.viewIsReady();
+
+        viewSteps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.startActivity(StepsStatisticActivity.class);
+            }
+        });
 
         TextView textView4 = root.findViewById(R.id.textView4);
         textView4.setOnClickListener(new View.OnClickListener() {
