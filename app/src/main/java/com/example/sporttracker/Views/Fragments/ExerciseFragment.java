@@ -73,7 +73,13 @@ public class ExerciseFragment extends Fragment implements OnMapReadyCallback {
 
         mapView.onCreate(savedInstanceState);
 
-        checkPermissions();
+        if (checkPermissions()) {
+            mapView.getMapAsync(this);
+
+            presenter.initLocationManager();
+
+            presenter.setLocationManager();
+        }
 
         mapView.getMapAsync(this);
 
@@ -207,14 +213,16 @@ public class ExerciseFragment extends Fragment implements OnMapReadyCallback {
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, googleMap.getMaxZoomLevel() - 4f));
     }
 
-    public void checkPermissions() {
+    public boolean checkPermissions() {
         int permissionStatusAccessFineLocation = ContextCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_FINE_LOCATION);
 
         if (permissionStatusAccessFineLocation != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_CODE_PERMISSION_ACCESS_FINE_LOCATION);
+            return false;
         } else {
+            return true;
         }
 
     }
