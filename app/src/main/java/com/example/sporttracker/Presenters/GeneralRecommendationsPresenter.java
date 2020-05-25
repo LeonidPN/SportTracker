@@ -1,7 +1,5 @@
 package com.example.sporttracker.Presenters;
 
-import android.util.Log;
-
 import com.example.sporttracker.R;
 import com.example.sporttracker.Services.RecommendationManagers.GeneralRecommendationService;
 import com.example.sporttracker.Services.Repositories.PreferencesRepository;
@@ -18,8 +16,6 @@ public class GeneralRecommendationsPresenter {
 
     private PreferencesRepository preferences;
 
-    private static final String TAG = "TestInfo";
-
     public GeneralRecommendationsPresenter(PreferencesRepository preferencesRepository) {
         this.preferences = preferencesRepository;
     }
@@ -35,7 +31,6 @@ public class GeneralRecommendationsPresenter {
                     .parse(preferences.getDateOfBirth()));
         } catch (ParseException e) {
         }
-        Log.i(TAG, preferences.getDateOfBirth());
         Calendar currentDate = Calendar.getInstance();
 
         int age;
@@ -44,7 +39,6 @@ public class GeneralRecommendationsPresenter {
         } else {
             age = currentDate.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR) - 1;
         }
-        Log.i(TAG, age + "");
 
         int groupId;
         if (age < 18) {
