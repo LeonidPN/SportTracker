@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.example.sporttracker.Presenters.MePresenter;
 import com.example.sporttracker.R;
 import com.example.sporttracker.Views.Activities.AboutActivity;
+import com.example.sporttracker.Views.Activities.GeneralRecommendationsActivity;
 import com.example.sporttracker.Views.Activities.GoalsActivity;
 import com.example.sporttracker.Views.Activities.PreferencesActivity;
 import com.example.sporttracker.Views.Activities.ProfileActivity;
@@ -23,6 +24,7 @@ public class MeFragment extends Fragment {
 
     private ConstraintLayout constraintLayoutProfile;
     private ConstraintLayout constraintLayoutGoals;
+    private ConstraintLayout constraintLayoutRecommendations;
     private ConstraintLayout constraintLayoutPreferences;
     private ConstraintLayout constraintLayoutAbout;
 
@@ -39,6 +41,7 @@ public class MeFragment extends Fragment {
 
         constraintLayoutProfile = root.findViewById(R.id.constraintLayoutProfile);
         constraintLayoutGoals = root.findViewById(R.id.constraintLayoutGoals);
+        constraintLayoutRecommendations = root.findViewById(R.id.constraintLayoutRecommendations);
         constraintLayoutPreferences = root.findViewById(R.id.constraintLayoutPreferences);
         constraintLayoutAbout = root.findViewById(R.id.constraintLayoutAbout);
 
@@ -53,6 +56,13 @@ public class MeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 presenter.startActivity(GoalsActivity.class);
+            }
+        });
+
+        constraintLayoutRecommendations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.startActivity(GeneralRecommendationsActivity.class);
             }
         });
 

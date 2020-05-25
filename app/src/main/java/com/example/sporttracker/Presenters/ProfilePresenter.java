@@ -3,7 +3,6 @@ package com.example.sporttracker.Presenters;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
@@ -15,6 +14,7 @@ import com.example.sporttracker.Views.Activities.ProfileActivity;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -125,9 +125,8 @@ public class ProfilePresenter {
             date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             activity.updateDate(date);
 
-            preferencesRepository.setDateOfBirth(DateUtils.formatDateTime(activity.getContext(),
-                    date.getTimeInMillis(),
-                    DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+            preferencesRepository.setDateOfBirth(
+                    new SimpleDateFormat("dd.MM.yyyy").format(date.getTime()));
 
             activity.setFields();
         }
