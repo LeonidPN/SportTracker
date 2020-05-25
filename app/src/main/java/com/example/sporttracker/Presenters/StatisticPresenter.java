@@ -490,19 +490,19 @@ public class StatisticPresenter {
         }
         if (activity.getExercise().equals(Activities.RUN.getName())) {
             calories = Activities.RUN.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         if (activity.getExercise().equals(Activities.CYCLE.getName())) {
             calories = Activities.CYCLE.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         if (activity.getExercise().equals(Activities.SWIM.getName())) {
             calories = Activities.SWIM.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         if (activity.getExercise().equals(Activities.WALK.getName())) {
             calories = Activities.WALK.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         return String.format("%.1f", calories) + " " + getResourceString(R.string.calories_abbreviation);
     }
@@ -516,19 +516,19 @@ public class StatisticPresenter {
         }
         if (activity.getExercise().equals(Activities.RUN.getName())) {
             calories = Activities.RUN.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         if (activity.getExercise().equals(Activities.CYCLE.getName())) {
             calories = Activities.CYCLE.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         if (activity.getExercise().equals(Activities.SWIM.getName())) {
             calories = Activities.SWIM.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         if (activity.getExercise().equals(Activities.WALK.getName())) {
             calories = Activities.WALK.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         return String.format("%.1f", calories) + " " + getResourceString(R.string.calories_abbreviation);
     }
@@ -542,19 +542,19 @@ public class StatisticPresenter {
         }
         if (activity.getExercise().equals(Activities.RUN.getName())) {
             calories = Activities.RUN.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         if (activity.getExercise().equals(Activities.CYCLE.getName())) {
             calories = Activities.CYCLE.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         if (activity.getExercise().equals(Activities.SWIM.getName())) {
             calories = Activities.SWIM.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         if (activity.getExercise().equals(Activities.WALK.getName())) {
             calories = Activities.WALK.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         return String.format("%.1f", calories) + " " + getResourceString(R.string.calories_abbreviation);
     }
@@ -568,19 +568,19 @@ public class StatisticPresenter {
         }
         if (activity.getExercise().equals(Activities.RUN.getName())) {
             calories = Activities.RUN.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         if (activity.getExercise().equals(Activities.CYCLE.getName())) {
             calories = Activities.CYCLE.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         if (activity.getExercise().equals(Activities.SWIM.getName())) {
             calories = Activities.SWIM.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         if (activity.getExercise().equals(Activities.WALK.getName())) {
             calories = Activities.WALK.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferences.getWeight());
+                    * time * preferences.getWeight();
         }
         return String.format("%.1f", calories) + " " + getResourceString(R.string.calories_abbreviation);
     }

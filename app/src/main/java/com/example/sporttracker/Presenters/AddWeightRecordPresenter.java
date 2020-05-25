@@ -115,7 +115,7 @@ public class AddWeightRecordPresenter {
         repository.open();
         repository.insert(model);
         repository.close();
-        preferences.setWeight(model.getWeight() + "");
+        preferences.setWeight(model.getWeight());
         activity.finish();
     }
 

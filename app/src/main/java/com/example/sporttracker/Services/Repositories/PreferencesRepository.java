@@ -5,20 +5,23 @@ import android.content.SharedPreferences;
 
 import com.example.sporttracker.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class PreferencesRepository {
 
     private static final String SEX_KEY = "sex";
-    private static final String SEX_CHANGED_KEY = "sex_changed";
     private static final String DATE_OF_BIRTH_KEY = "date_of_birth";
-    private static final String DATE_OF_BIRTH_CHANGED_KEY = "date_of_birth_changed";
     private static final String HEIGHT_KEY = "height";
-    private static final String HEIGHT_CHANGED_KEY = "height_changed";
     private static final String WEIGHT_KEY = "weight";
-    private static final String WEIGHT_CHANGED_KEY = "weight_changed";
     private static final String STEP_COUNT_DELTA_KEY = "step_count_delta";
     private static final String WEIGHT_GOAL_KEY = "weight_goal";
     private static final String STEPS_GOAL_KEY = "steps_goal";
     private static final String WEIGHT_START_KEY = "weight_start";
+
+    private final SimpleDateFormat dateOfBirthFormat = new SimpleDateFormat("dd.MM.yyyy");
 
     private SharedPreferences settings;
 
@@ -37,57 +40,45 @@ public class PreferencesRepository {
     public void setSex(String sex) {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(SEX_KEY, sex);
-        editor.putBoolean(SEX_CHANGED_KEY, true);
         editor.apply();
     }
 
-    public boolean getSexChanged() {
-        return settings.getBoolean(SEX_CHANGED_KEY, false);
+    public Calendar getDateOfBirth() {
+        String date = settings.getString(DATE_OF_BIRTH_KEY,
+                getResourceString(R.string.date_of_birth_default_value));
+        Calendar calendar = new GregorianCalendar();
+        try {
+            calendar.setTime(dateOfBirthFormat.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return calendar;
     }
 
-    public String getDateOfBirth() {
-        return settings.getString(DATE_OF_BIRTH_KEY, getResourceString(R.string.date_of_birth_default_value));
-    }
-
-    public void setDateOfBirth(String date) {
+    public void setDateOfBirth(Calendar date) {
         SharedPreferences.Editor editor = settings.edit();
-        editor.putString(DATE_OF_BIRTH_KEY, date);
-        editor.putBoolean(DATE_OF_BIRTH_CHANGED_KEY, true);
+        editor.putString(DATE_OF_BIRTH_KEY, dateOfBirthFormat.format(date.getTime()));
         editor.apply();
     }
 
-    public boolean getDateOfBirthChanged() {
-        return settings.getBoolean(DATE_OF_BIRTH_CHANGED_KEY, false);
+    public float getHeight() {
+        return Float.parseFloat(settings.getString(HEIGHT_KEY, getResourceString(R.string.height_default_value)));
     }
 
-    public String getHeight() {
-        return settings.getString(HEIGHT_KEY, getResourceString(R.string.height_default_value));
-    }
-
-    public void setHeight(String height) {
+    public void setHeight(float height) {
         SharedPreferences.Editor editor = settings.edit();
-        editor.putString(HEIGHT_KEY, height);
-        editor.putBoolean(HEIGHT_CHANGED_KEY, true);
+        editor.putString(HEIGHT_KEY, height + "");
         editor.apply();
     }
 
-    public boolean getHeightChanged() {
-        return settings.getBoolean(HEIGHT_CHANGED_KEY, false);
+    public float getWeight() {
+        return Float.parseFloat(settings.getString(WEIGHT_KEY, getResourceString(R.string.weight_default_value)));
     }
 
-    public String getWeight() {
-        return settings.getString(WEIGHT_KEY, getResourceString(R.string.weight_default_value));
-    }
-
-    public void setWeight(String weight) {
+    public void setWeight(float weight) {
         SharedPreferences.Editor editor = settings.edit();
-        editor.putString(WEIGHT_KEY, weight);
-        editor.putBoolean(WEIGHT_CHANGED_KEY, true);
+        editor.putString(WEIGHT_KEY, weight + "");
         editor.apply();
-    }
-
-    public boolean getWeightChanged() {
-        return settings.getBoolean(WEIGHT_CHANGED_KEY, false);
     }
 
     public void setStepCountDelta(int delta) {
@@ -122,8 +113,8 @@ public class PreferencesRepository {
         editor.apply();
     }
 
-    public String getStartWeight() {
-        return settings.getString(WEIGHT_START_KEY, getResourceString(R.string.weight_default_value));
+    public float getStartWeight() {
+        return Float.parseFloat(settings.getString(WEIGHT_START_KEY, getResourceString(R.string.weight_default_value)));
     }
 
     private String getResourceString(int id) {

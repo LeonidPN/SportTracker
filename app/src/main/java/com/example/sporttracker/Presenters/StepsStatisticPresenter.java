@@ -386,26 +386,26 @@ public class StepsStatisticPresenter {
     }
 
     public String getDayCalories() {
-        float calories = 1f * Float.parseFloat(preferences.getWeight()) * dayStepsCount *
-                (Float.parseFloat(preferences.getHeight()) / 4 + 25) / 100000 / 2;
+        float calories = 1f * preferences.getWeight() * dayStepsCount *
+                (preferences.getHeight() / 4 + 25) / 100000 / 2;
         return String.format("%.1f", calories) + " " + getResourceString(R.string.calories_abbreviation);
     }
 
     public String getWeekCalories() {
-        float calories = 1f * Float.parseFloat(preferences.getWeight()) * weekStepsCount *
-                (Float.parseFloat(preferences.getHeight()) / 4 + 25) / 100000 / 2;
+        float calories = 1f * preferences.getWeight() * weekStepsCount *
+                (preferences.getHeight() / 4 + 25) / 100000 / 2;
         return String.format("%.1f", calories) + " " + getResourceString(R.string.calories_abbreviation);
     }
 
     public String getMonthCalories() {
-        float calories = 1f * Float.parseFloat(preferences.getWeight()) * monthStepsCount *
-                (Float.parseFloat(preferences.getHeight()) / 4 + 25) / 100000 / 2;
+        float calories = 1f * preferences.getWeight() * monthStepsCount *
+                (preferences.getHeight() / 4 + 25) / 100000 / 2;
         return String.format("%.1f", calories) + " " + getResourceString(R.string.calories_abbreviation);
     }
 
     public String getYearCalories() {
-        float calories = 1f * Float.parseFloat(preferences.getWeight()) * yearStepsCount *
-                (Float.parseFloat(preferences.getHeight()) / 4 + 25) / 100000 / 2;
+        float calories = 1f * preferences.getWeight() * yearStepsCount *
+                (preferences.getHeight() / 4 + 25) / 100000 / 2;
         return String.format("%.1f", calories) + " " + getResourceString(R.string.calories_abbreviation);
     }
 

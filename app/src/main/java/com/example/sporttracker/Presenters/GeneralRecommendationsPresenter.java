@@ -5,8 +5,6 @@ import com.example.sporttracker.Services.RecommendationManagers.GeneralRecommend
 import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 import com.example.sporttracker.Views.Activities.GeneralRecommendationsActivity;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -25,12 +23,7 @@ public class GeneralRecommendationsPresenter {
     }
 
     public void viewIsReady() {
-        Calendar dateOfBirth = Calendar.getInstance();
-        try {
-            dateOfBirth.setTime(new SimpleDateFormat("dd.MM.yyyy")
-                    .parse(preferences.getDateOfBirth()));
-        } catch (ParseException e) {
-        }
+        Calendar dateOfBirth = preferences.getDateOfBirth();
         Calendar currentDate = Calendar.getInstance();
 
         int age;

@@ -123,19 +123,19 @@ public class ExersiseRecordsExpendableListAdapter extends BaseExpandableListAdap
 
         if (exercise.equals(Activities.RUN.getName())) {
             calories = Activities.RUN.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferencesRepository.getWeight());
+                    * time * preferencesRepository.getWeight();
         }
         if (exercise.equals(Activities.CYCLE.getName())) {
             calories = Activities.CYCLE.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferencesRepository.getWeight());
+                    * time * preferencesRepository.getWeight();
         }
         if (exercise.equals(Activities.SWIM.getName())) {
             calories = Activities.SWIM.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferencesRepository.getWeight());
+                    * time * preferencesRepository.getWeight();
         }
         if (exercise.equals(Activities.WALK.getName())) {
             calories = Activities.WALK.getCalories(distance / (float) time / 1000 * 3600)
-                    * time * Float.parseFloat(preferencesRepository.getWeight());
+                    * time * preferencesRepository.getWeight();
         }
 
         TextView textViewCalories = convertView.findViewById(R.id.textView_calories);

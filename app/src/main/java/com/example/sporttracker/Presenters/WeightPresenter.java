@@ -87,11 +87,11 @@ public class WeightPresenter {
             });
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
             float weight = list.get(0).getWeight();
-            float start = Float.parseFloat(preferences.getStartWeight());
+            float start = preferences.getStartWeight();
             float goal = preferences.getWeightGoal();
             fragment.updateViews(simpleDateFormat.format(date), weight, start, goal, list);
         } else {
-            fragment.updateViews("-1", Float.parseFloat(preferences.getWeight()), -1, -1, null);
+            fragment.updateViews("-1", preferences.getWeight(), -1, -1, null);
         }
     }
 

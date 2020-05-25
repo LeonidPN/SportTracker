@@ -298,19 +298,19 @@ public class ExerciseMapPresenter {
         } else {
             if (activity.getExercise().equals(Activities.RUN.getName())) {
                 calories = Activities.RUN.getCalories(this.distance / (float) duration / 1000 * 3600)
-                        * duration * Float.parseFloat(preferences.getWeight());
+                        * duration * preferences.getWeight();
             }
             if (activity.getExercise().equals(Activities.CYCLE.getName())) {
                 calories = Activities.CYCLE.getCalories(this.distance / (float) duration / 1000 * 3600)
-                        * duration * Float.parseFloat(preferences.getWeight());
+                        * duration * preferences.getWeight();
             }
             if (activity.getExercise().equals(Activities.SWIM.getName())) {
                 calories = Activities.SWIM.getCalories(this.distance / (float) duration / 1000 * 3600)
-                        * duration * Float.parseFloat(preferences.getWeight());
+                        * duration * preferences.getWeight();
             }
             if (activity.getExercise().equals(Activities.WALK.getName())) {
                 calories = Activities.WALK.getCalories(this.distance / (float) duration / 1000 * 3600)
-                        * duration * Float.parseFloat(preferences.getWeight());
+                        * duration * preferences.getWeight();
             }
             cal = String.format("%.1f", calories) + " " + getResourceString(R.string.calories_abbreviation);
         }

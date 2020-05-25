@@ -58,10 +58,10 @@ public class HealthPresenter {
             }
         }
 
-        float distance = (Float.parseFloat(preferences.getHeight()) / 4 + 25) / 100 * count;
+        float distance = (preferences.getHeight() / 4 + 25) / 100 * count;
 
-        float calories = 1f * Float.parseFloat(preferences.getWeight()) * count *
-                (Float.parseFloat(preferences.getHeight()) / 4 + 25) / 100000 / 2;
+        float calories = 1f * preferences.getWeight() * count *
+                (preferences.getHeight() / 4 + 25) / 100000 / 2;
 
         fragment.updateViews(count, distance, calories);
     }

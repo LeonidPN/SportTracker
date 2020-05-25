@@ -1,7 +1,5 @@
 package com.example.sporttracker.Views.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -9,10 +7,13 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.sporttracker.Presenters.ProfilePresenter;
 import com.example.sporttracker.R;
 import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -83,9 +84,12 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void setFields(){
         textViewSex.setText(presenter.getRepository().getSex());
-        textViewDateOfBirth.setText(presenter.getRepository().getDateOfBirth());
-        textViewHeight.setText(presenter.getRepository().getHeight() + " см");
-        textViewWeight.setText(presenter.getRepository().getWeight() + " кг");
+        textViewDateOfBirth.setText(new SimpleDateFormat("LLLL d, yyyy")
+                .format(presenter.getRepository().getDateOfBirth().getTime()));
+        textViewHeight.setText(String.format("%.1f", presenter.getRepository().getHeight()) + " " +
+                getResources().getString(R.string.santimeters_abbreviation));
+        textViewWeight.setText(String.format("%.1f", presenter.getRepository().getWeight()) + " " +
+                getResources().getString(R.string.kilogram_abbreviation));
     }
 
     public void setInitialDate(Calendar dateAndTime) {

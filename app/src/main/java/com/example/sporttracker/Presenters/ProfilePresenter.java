@@ -12,11 +12,7 @@ import com.example.sporttracker.R;
 import com.example.sporttracker.Services.Repositories.PreferencesRepository;
 import com.example.sporttracker.Views.Activities.ProfileActivity;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class ProfilePresenter {
 
@@ -43,14 +39,7 @@ public class ProfilePresenter {
 
     public void viewIsReady() {
         activity.setFields();
-        Date d = new Date();
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG);
-        try {
-            d = dateFormat.parse(preferencesRepository.getDateOfBirth());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        date.setTime(d);
+        date.setTime(preferencesRepository.getDateOfBirth().getTime());
     }
 
     public void changeSex() {
@@ -125,8 +114,7 @@ public class ProfilePresenter {
             date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             activity.updateDate(date);
 
-            preferencesRepository.setDateOfBirth(
-                    new SimpleDateFormat("dd.MM.yyyy").format(date.getTime()));
+            preferencesRepository.setDateOfBirth(date);
 
             activity.setFields();
         }
@@ -137,7 +125,7 @@ public class ProfilePresenter {
         View promptsView = li.inflate(R.layout.edit_text_dialog_number, null);
 
         final EditText userInput = promptsView.findViewById(R.id.editText);
-        userInput.setText(preferencesRepository.getHeight());
+        userInput.setText(String.format("%.1f", preferencesRepository.getHeight()));
         userInput.requestFocus();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -148,7 +136,7 @@ public class ProfilePresenter {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (!userInput.getText().toString().isEmpty()) {
-                    preferencesRepository.setHeight(userInput.getText().toString());
+                    preferencesRepository.setHeight(Float.parseFloat(userInput.getText().toString()));
                     activity.setFields();
                 }
             }
@@ -171,7 +159,7 @@ public class ProfilePresenter {
         View promptsView = li.inflate(R.layout.edit_text_dialog_number, null);
 
         final EditText userInput = promptsView.findViewById(R.id.editText);
-        userInput.setText(preferencesRepository.getWeight());
+        userInput.setText(String.format("%.1f", preferencesRepository.getWeight()));
         userInput.requestFocus();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -182,7 +170,7 @@ public class ProfilePresenter {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (!userInput.getText().toString().isEmpty()) {
-                    preferencesRepository.setWeight(userInput.getText().toString());
+                    preferencesRepository.setWeight(Float.parseFloat(userInput.getText().toString()));
                 }
                 activity.setFields();
             }

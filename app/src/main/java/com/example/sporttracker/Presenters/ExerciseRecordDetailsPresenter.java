@@ -40,7 +40,7 @@ public class ExerciseRecordDetailsPresenter {
 
         float calories = Activities.RUN.getCalories(recordModel.getDistance()
                 / (float) recordModel.getTime() / 1000 * 3600)
-                * recordModel.getTime() * Float.parseFloat(preferencesRepository.getWeight());
+                * recordModel.getTime() * preferencesRepository.getWeight();
 
         activity.setViews(recordModel, calories);
     }
