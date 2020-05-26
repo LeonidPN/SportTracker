@@ -51,6 +51,9 @@ public class WeightHistoryActivity extends AppCompatActivity {
         WeightRecordsExpendableListAdapter adapter =
                 new WeightRecordsExpendableListAdapter(this, groups, presenter);
         expandableListView.setAdapter(adapter);
+        if (groups.size() > 0) {
+            expandableListView.expandGroup(0);
+        }
     }
 
     public Context getContext() {

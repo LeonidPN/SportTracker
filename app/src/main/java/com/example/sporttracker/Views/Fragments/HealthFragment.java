@@ -97,10 +97,13 @@ public class HealthFragment extends Fragment {
         return root;
     }
 
-    public void updateViews(int steps, float distance, float calories) {
-        textViewSteps.setText(steps + " шагов");
-        textViewDistance.setText(String.format("%.1f", distance) + " м");
-        textViewCalories.setText(String.format("%.1f", calories) + " ккал");
+    public void updateViews(int steps, int stepsGoal, float distance, float calories) {
+        textViewSteps.setText(steps + "/" + stepsGoal + " " + getResources()
+                .getString(R.string.steps_notify_abbreviation_3));
+        textViewDistance.setText(String.format("%.1f", distance) + " " + getResources()
+                .getString(R.string.kilometers_abbreviation));
+        textViewCalories.setText(String.format("%.1f", calories) + " " + getResources()
+                .getString(R.string.calories_abbreviation));
     }
 
     public Context getContext() {

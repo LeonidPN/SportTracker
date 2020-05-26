@@ -82,6 +82,11 @@ public class WeightRecordsItemRecyclerViewAdapter
                 return true;
             }
         });
+
+        if (position == list.size() - 1) {
+            (holder.view.findViewById(R.id.divider)).setEnabled(false);
+            (holder.view.findViewById(R.id.divider)).setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

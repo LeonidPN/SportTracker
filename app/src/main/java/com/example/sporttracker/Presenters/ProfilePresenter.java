@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.NumberPicker;
 
 import com.example.sporttracker.R;
 import com.example.sporttracker.Services.Repositories.PreferencesRepository;
@@ -122,11 +122,27 @@ public class ProfilePresenter {
 
     public void changeHeight() {
         LayoutInflater li = LayoutInflater.from(activity.getContext());
-        View promptsView = li.inflate(R.layout.edit_text_dialog_number, null);
+        View promptsView = li.inflate(R.layout.number_picker_dialog, null);
 
-        final EditText userInput = promptsView.findViewById(R.id.editText);
-        userInput.setText(String.format("%.1f", preferencesRepository.getHeight()));
-        userInput.requestFocus();
+        final NumberPicker numberPicker = promptsView.findViewById(R.id.numberPicker);
+
+        int minValue = 50;
+        int maxValue = 250;
+
+        final String[] values = new String[maxValue - minValue + 1];
+
+        for (int i = 0; i < values.length; i++) {
+            values[i] = (minValue + i) + " " + getResourceString(R.string.santimeters_abbreviation);
+        }
+
+        numberPicker.setMinValue(minValue);
+        numberPicker.setMaxValue(maxValue);
+
+        numberPicker.setDisplayedValues(values);
+
+        numberPicker.setValue((int) preferencesRepository.getHeight());
+
+        numberPicker.setWrapSelectorWheel(true);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setView(promptsView);
@@ -135,10 +151,8 @@ public class ProfilePresenter {
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (!userInput.getText().toString().isEmpty()) {
-                    preferencesRepository.setHeight(Float.parseFloat(userInput.getText().toString()));
-                    activity.setFields();
-                }
+                preferencesRepository.setHeight(numberPicker.getValue());
+                activity.setFields();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -156,11 +170,27 @@ public class ProfilePresenter {
 
     public void changeWeight() {
         LayoutInflater li = LayoutInflater.from(activity.getContext());
-        View promptsView = li.inflate(R.layout.edit_text_dialog_number, null);
+        View promptsView = li.inflate(R.layout.number_picker_dialog, null);
 
-        final EditText userInput = promptsView.findViewById(R.id.editText);
-        userInput.setText(String.format("%.1f", preferencesRepository.getWeight()));
-        userInput.requestFocus();
+        final NumberPicker numberPicker = promptsView.findViewById(R.id.numberPicker);
+
+        int minValue = 10;
+        int maxValue = 250;
+
+        final String[] values = new String[maxValue - minValue + 1];
+
+        for (int i = 0; i < values.length; i++) {
+            values[i] = (minValue + i) + " " + getResourceString(R.string.kilogram_abbreviation);
+        }
+
+        numberPicker.setMinValue(minValue);
+        numberPicker.setMaxValue(maxValue);
+
+        numberPicker.setDisplayedValues(values);
+
+        numberPicker.setValue((int) preferencesRepository.getWeight());
+
+        numberPicker.setWrapSelectorWheel(true);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setView(promptsView);
@@ -169,9 +199,7 @@ public class ProfilePresenter {
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (!userInput.getText().toString().isEmpty()) {
-                    preferencesRepository.setWeight(Float.parseFloat(userInput.getText().toString()));
-                }
+                preferencesRepository.setWeight(numberPicker.getValue());
                 activity.setFields();
             }
         });

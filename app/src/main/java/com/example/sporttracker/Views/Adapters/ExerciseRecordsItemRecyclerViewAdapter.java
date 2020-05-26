@@ -53,7 +53,8 @@ public class ExerciseRecordsItemRecyclerViewAdapter
         final ExerciseRecordModel recordModel = list.get(position);
 
         ((TextView) holder.view.findViewById(R.id.textView_distance))
-                .setText(recordModel.getDistance() + " м");
+                .setText(String.format("%.1f", recordModel.getDistance()) + " " +
+                        holder.view.getResources().getString(R.string.meters_abbreviation));
 
         Date date = new Date();
         date.setTime(recordModel.getTime());
@@ -81,6 +82,11 @@ public class ExerciseRecordsItemRecyclerViewAdapter
                 return true;
             }
         });
+
+        if (position == list.size() - 1) {
+            (holder.view.findViewById(R.id.divider)).setEnabled(false);
+            (holder.view.findViewById(R.id.divider)).setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

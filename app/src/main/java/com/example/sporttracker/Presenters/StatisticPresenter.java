@@ -450,19 +450,19 @@ public class StatisticPresenter {
     }
 
     public String getWeekDistance() {
-        return (weekDistance / 1000) + " " + getResourceString(R.string.kilometers_abbreviation);
+        return String.format("%.3f", (weekDistance / 1000)) + " " + getResourceString(R.string.kilometers_abbreviation);
     }
 
     public String getMonthDistance() {
-        return (monthDistance / 1000) + " " + getResourceString(R.string.kilometers_abbreviation);
+        return String.format("%.3f", (monthDistance / 1000)) + " " + getResourceString(R.string.kilometers_abbreviation);
     }
 
     public String getYearDistance() {
-        return (yearDistance / 1000) + " " + getResourceString(R.string.kilometers_abbreviation);
+        return String.format("%.3f", (yearDistance / 1000)) + " " + getResourceString(R.string.kilometers_abbreviation);
     }
 
     public String getAllDistance() {
-        return (allDistance / 1000) + " " + getResourceString(R.string.kilometers_abbreviation);
+        return String.format("%.3f", (allDistance / 1000)) + " " + getResourceString(R.string.kilometers_abbreviation);
     }
 
     public String getWeekDuration() {

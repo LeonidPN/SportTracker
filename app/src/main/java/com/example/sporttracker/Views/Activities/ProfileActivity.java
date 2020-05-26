@@ -82,13 +82,13 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    public void setFields(){
+    public void setFields() {
         textViewSex.setText(presenter.getRepository().getSex());
         textViewDateOfBirth.setText(new SimpleDateFormat("LLLL d, yyyy")
                 .format(presenter.getRepository().getDateOfBirth().getTime()));
-        textViewHeight.setText(String.format("%.1f", presenter.getRepository().getHeight()) + " " +
+        textViewHeight.setText(((int) presenter.getRepository().getHeight()) + " " +
                 getResources().getString(R.string.santimeters_abbreviation));
-        textViewWeight.setText(String.format("%.1f", presenter.getRepository().getWeight()) + " " +
+        textViewWeight.setText(((int) presenter.getRepository().getWeight()) + " " +
                 getResources().getString(R.string.kilogram_abbreviation));
     }
 
@@ -103,7 +103,7 @@ public class ProfileActivity extends AppCompatActivity {
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
     }
 
-    public Context getContext(){
+    public Context getContext() {
         return this;
     }
 

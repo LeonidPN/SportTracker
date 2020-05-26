@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -28,6 +29,9 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class ExercisesMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
@@ -38,9 +42,13 @@ public class ExercisesMapActivity extends AppCompatActivity implements OnMapRead
 
     private MapView mapView;
 
+    private ConstraintLayout constraintLayout;
+    private ConstraintLayout constraintLayoutCountDown;
+
     private TextView textViewDistance;
     private TextView textViewTime;
     private TextView textViewCalories;
+    private TextView textViewCountDown;
 
     private FloatingActionButton floatingActionButtonPause;
     private FloatingActionButton floatingActionButtonStart;
@@ -52,10 +60,20 @@ public class ExercisesMapActivity extends AppCompatActivity implements OnMapRead
 
     private String exercise;
 
+    private int countDown;
+
+    private Timer countDownTimer;
+
+    private ExercisesMapActivity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercises_map);
+
+        activity = this;
+
+        countDown = 3;
 
         exercise = getIntent().getExtras().getString(getResources().getString(R.string.exercises));
 
@@ -67,9 +85,13 @@ public class ExercisesMapActivity extends AppCompatActivity implements OnMapRead
 
         mapView = findViewById(R.id.mapView);
 
+        constraintLayout = findViewById(R.id.constraintLayout);
+        constraintLayoutCountDown = findViewById(R.id.constraintLayout_countDown);
+
         textViewDistance = findViewById(R.id.textView_distance);
         textViewTime = findViewById(R.id.textView_time);
         textViewCalories = findViewById(R.id.textView_calories);
+        textViewCountDown = findViewById(R.id.textView_countDown);
 
         floatingActionButtonPause = findViewById(R.id.floatingActionButton_pause);
         floatingActionButtonStart = findViewById(R.id.floatingActionButton_start);
@@ -124,6 +146,8 @@ public class ExercisesMapActivity extends AppCompatActivity implements OnMapRead
                 presenter.save();
             }
         });
+
+        startCountDown();
     }
 
     public void updateViews(String distance, String time, String calories) {
@@ -193,8 +217,6 @@ public class ExercisesMapActivity extends AppCompatActivity implements OnMapRead
         uiSettings.setRotateGesturesEnabled(false);
         uiSettings.setTiltGesturesEnabled(false);
         uiSettings.setZoomGesturesEnabled(true);
-
-        presenter.resume();
     }
 
     public void setLocation(Location location) {
@@ -243,5 +265,77 @@ public class ExercisesMapActivity extends AppCompatActivity implements OnMapRead
 
     public String getExercise() {
         return exercise;
+    }
+
+    private void startCountDown() {
+        mapView.setVisibility(View.INVISIBLE);
+        mapView.setEnabled(false);
+
+        constraintLayout.setVisibility(View.INVISIBLE);
+        constraintLayout.setEnabled(false);
+
+        constraintLayoutCountDown.setVisibility(View.VISIBLE);
+        constraintLayoutCountDown.setEnabled(true);
+
+        countDownTimer = new Timer();
+
+        CountDownTimerTask countDownTimerTask = new CountDownTimerTask();
+
+        countDownTimer.schedule(countDownTimerTask, 0, 1000);
+    }
+
+    private void setTextViewCountDown() {
+        switch (countDown) {
+            case 3:
+                textViewCountDown.setText("3");
+                break;
+            case 2:
+                textViewCountDown.setText("2");
+                break;
+            case 1:
+                textViewCountDown.setText("1");
+                break;
+            case 0:
+                textViewCountDown.setText("Go!");
+                break;
+        }
+    }
+
+    private void startExercise() {
+        countDownTimer.cancel();
+        countDownTimer = null;
+
+        mapView.setVisibility(View.VISIBLE);
+        mapView.setEnabled(true);
+
+        constraintLayout.setVisibility(View.VISIBLE);
+        constraintLayout.setEnabled(true);
+
+        constraintLayoutCountDown.setVisibility(View.INVISIBLE);
+        constraintLayoutCountDown.setEnabled(false);
+
+        presenter.resume();
+    }
+
+    private class CountDownTimerTask extends TimerTask {
+        @Override
+        public void run() {
+            if (countDown >= 0) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setTextViewCountDown();
+                        countDown--;
+                    }
+                });
+            } else {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        startExercise();
+                    }
+                });
+            }
+        }
     }
 }

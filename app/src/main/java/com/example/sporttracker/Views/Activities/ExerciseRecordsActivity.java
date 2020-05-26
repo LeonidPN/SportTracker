@@ -1,7 +1,5 @@
 package com.example.sporttracker.Views.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +9,8 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sporttracker.Models.Enumerations.Activities;
 import com.example.sporttracker.Models.ExerciseRecordModel;
@@ -89,6 +89,9 @@ public class ExerciseRecordsActivity extends AppCompatActivity {
         ExersiseRecordsExpendableListAdapter adapter =
                 new ExersiseRecordsExpendableListAdapter(this, groups, exercise, presenter);
         expandableListView.setAdapter(adapter);
+        if (groups.size() > 0) {
+            expandableListView.expandGroup(0);
+        }
     }
 
     public String getExercise() {

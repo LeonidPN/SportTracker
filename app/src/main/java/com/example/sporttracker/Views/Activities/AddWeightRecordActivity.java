@@ -111,7 +111,7 @@ public class AddWeightRecordActivity extends AppCompatActivity {
         return model;
     }
 
-    public void setTextViewWeight(String weight) {
+    public void setTextViewWeight(int weight) {
         textViewWeight.setText(weight + " " + getResources().getString(R.string.kilogram_abbreviation));
     }
 

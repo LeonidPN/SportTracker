@@ -92,7 +92,7 @@ public class PreferencesRepository {
     }
 
     public int getWeightGoal() {
-        return settings.getInt(WEIGHT_GOAL_KEY, 0);
+        return settings.getInt(WEIGHT_GOAL_KEY, 60);
     }
 
     public void setWeightGoal(int weight) {
@@ -104,7 +104,7 @@ public class PreferencesRepository {
     }
 
     public int getStepsGoal() {
-        return settings.getInt(STEPS_GOAL_KEY, 0);
+        return settings.getInt(STEPS_GOAL_KEY, 10000);
     }
 
     public void setStepsGoal(int steps) {

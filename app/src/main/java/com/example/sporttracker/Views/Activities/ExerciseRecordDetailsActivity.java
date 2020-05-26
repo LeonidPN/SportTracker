@@ -1,12 +1,12 @@
 package com.example.sporttracker.Views.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sporttracker.Models.ExerciseRecordModel;
 import com.example.sporttracker.Presenters.ExerciseRecordDetailsPresenter;
@@ -61,12 +61,14 @@ public class ExerciseRecordDetailsActivity extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("LLLL d, yyyy");
         textViewDate.setText(simpleDateFormat.format(recordModel.getDate()));
 
-        textViewDistance.setText(recordModel.getDistance() + " м");
+        textViewDistance.setText(String.format("%.1f", recordModel.getDistance()) + " " +
+                getResources().getString(R.string.meters_abbreviation));
 
         SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss");
         textViewDuration.setText(simpleTimeFormat.format(recordModel.getTime()));
 
-        textViewCalories.setText(calories + " ккал");
+        textViewCalories.setText(String.format("%.1f", calories) + " " +
+                getResources().getString(R.string.calories_abbreviation));
     }
 
     public Context getContext() {

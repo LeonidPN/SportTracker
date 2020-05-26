@@ -115,7 +115,8 @@ public class ExersiseRecordsExpendableListAdapter extends BaseExpandableListAdap
         }
 
         TextView textViewDistance = convertView.findViewById(R.id.textView_distance);
-        textViewDistance.setText(distance + " м");
+        textViewDistance.setText(String.format("%.1f", distance) + " " +
+                convertView.getResources().getString(R.string.meters_abbreviation));
 
         PreferencesRepository preferencesRepository = new PreferencesRepository(context);
 
@@ -139,7 +140,8 @@ public class ExersiseRecordsExpendableListAdapter extends BaseExpandableListAdap
         }
 
         TextView textViewCalories = convertView.findViewById(R.id.textView_calories);
-        textViewCalories.setText(calories + " ккал");
+        textViewCalories.setText(String.format("%.1f", calories) + " " +
+                convertView.getResources().getString(R.string.calories_abbreviation));
 
         RecyclerView recyclerView = convertView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));

@@ -3,13 +3,12 @@ package com.example.sporttracker.Presenters;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TimePicker;
+import android.widget.NumberPicker;
 
 import com.example.sporttracker.Models.Enumerations.Activities;
 import com.example.sporttracker.Models.ExerciseRecordModel;
@@ -42,6 +41,10 @@ public class AddExerciseRecordPresenter {
 
     public void viewIsReady() {
         loadActivityList();
+        date = Calendar.getInstance();
+        activity.updateDate(date);
+        activity.setTextViewDistance("0");
+        activity.updateTime(time);
     }
 
     private void loadActivityList() {
@@ -76,20 +79,94 @@ public class AddExerciseRecordPresenter {
     }
 
     public void changeDuration() {
-        this.activity.setInitialTime(time);
-        new TimePickerDialog(activity.getContext(), t,
-                time.get(Calendar.HOUR_OF_DAY),
-                time.get(Calendar.MINUTE), true)
-                .show();
-    }
+        LayoutInflater li = LayoutInflater.from(activity.getContext());
+        View promptsView = li.inflate(R.layout.number_picker_time_dialog, null);
 
-    private TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            time.set(Calendar.MINUTE, minute);
-            activity.updateTime(time);
+        final NumberPicker numberPickerHour = promptsView.findViewById(R.id.numberPicker_hour);
+        final NumberPicker numberPickerMinute = promptsView.findViewById(R.id.numberPicker_minute);
+        final NumberPicker numberPickerSecond = promptsView.findViewById(R.id.numberPicker_second);
+
+        int minValueHour = 0;
+        int maxValueHour = 23;
+
+        int minValueMinute = 0;
+        int maxValueMinute = 59;
+
+        int minValueSecond = 0;
+        int maxValueSecond = 59;
+
+        final String[] valuesHour = new String[maxValueHour - minValueHour + 1];
+
+        for (int i = 0; i < valuesHour.length; i++) {
+            if (minValueHour + i < 10) {
+                valuesHour[i] = "0" + (minValueHour + i);
+            } else {
+                valuesHour[i] = (minValueHour + i) + "";
+            }
         }
-    };
+
+        final String[] valuesMinute = new String[maxValueMinute - minValueMinute + 1];
+
+        for (int i = 0; i < valuesMinute.length; i++) {
+            if (minValueMinute + i < 10) {
+                valuesMinute[i] = "0" + (minValueMinute + i);
+            } else {
+                valuesMinute[i] = (minValueMinute + i) + "";
+            }
+        }
+
+        final String[] valuesSecond = new String[maxValueSecond - minValueSecond + 1];
+
+        for (int i = 0; i < valuesSecond.length; i++) {
+            if (minValueSecond + i < 10) {
+                valuesSecond[i] = "0" + (minValueSecond + i);
+            } else {
+                valuesSecond[i] = (minValueSecond + i) + "";
+            }
+        }
+
+        numberPickerHour.setMinValue(minValueHour);
+        numberPickerHour.setMaxValue(maxValueHour);
+        numberPickerHour.setDisplayedValues(valuesHour);
+        numberPickerHour.setValue(time.get(Calendar.HOUR_OF_DAY));
+        numberPickerHour.setWrapSelectorWheel(true);
+
+        numberPickerMinute.setMinValue(minValueMinute);
+        numberPickerMinute.setMaxValue(maxValueMinute);
+        numberPickerMinute.setDisplayedValues(valuesMinute);
+        numberPickerMinute.setValue(time.get(Calendar.MINUTE));
+        numberPickerMinute.setWrapSelectorWheel(true);
+
+        numberPickerSecond.setMinValue(minValueSecond);
+        numberPickerSecond.setMaxValue(maxValueSecond);
+        numberPickerSecond.setDisplayedValues(valuesSecond);
+        numberPickerSecond.setValue(time.get(Calendar.SECOND));
+        numberPickerSecond.setWrapSelectorWheel(true);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setView(promptsView);
+        builder.setTitle(getResourceString(R.string.duration));
+        builder.setCancelable(false);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                time.set(Calendar.HOUR_OF_DAY, numberPickerHour.getValue());
+                time.set(Calendar.MINUTE, numberPickerMinute.getValue());
+                time.set(Calendar.SECOND, numberPickerSecond.getValue());
+                activity.updateTime(time);
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                activity.updateTime(time);
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        this.activity.setInitialTime(time);
+    }
 
     public void setDate() {
         this.activity.setInitialDate(date);
@@ -160,8 +237,11 @@ public class AddExerciseRecordPresenter {
         repository.open();
         repository.insert(model);
         repository.close();
-        activity.showToast(activity.getResources().getString(R.string.ok));
         activity.finish();
+    }
+
+    private String getResourceString(int id) {
+        return activity.getResources().getString(id);
     }
 
 }

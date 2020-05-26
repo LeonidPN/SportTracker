@@ -1,7 +1,5 @@
 package com.example.sporttracker.Views.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -13,12 +11,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.sporttracker.Models.Enumerations.Activities;
 import com.example.sporttracker.Models.ExerciseRecordModel;
 import com.example.sporttracker.Presenters.AddExerciseRecordPresenter;
 import com.example.sporttracker.R;
 import com.example.sporttracker.Services.Repositories.Databases.ActivitiesDatabase.ExerciseRecordsRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class AddExerciseRecordActivity extends AppCompatActivity {
@@ -48,7 +49,6 @@ public class AddExerciseRecordActivity extends AppCompatActivity {
     private void init() {
         presenter = new AddExerciseRecordPresenter(new ExerciseRecordsRepository(this));
         presenter.attachView(this);
-        presenter.viewIsReady();
 
         spinnerExercise = findViewById(R.id.spinner_exercise);
         textViewDistance = findViewById(R.id.text_distance);
@@ -58,6 +58,8 @@ public class AddExerciseRecordActivity extends AppCompatActivity {
 
         buttonSave = findViewById(R.id.imageButtonSave);
         buttonCancel = findViewById(R.id.imageButtonCancel);
+
+        presenter.viewIsReady();
 
         textViewDistance.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +136,8 @@ public class AddExerciseRecordActivity extends AppCompatActivity {
     }
 
     public void setTextViewDistance(String text) {
-        textViewDistance.setText(text + " м");
+        textViewDistance.setText(text + " " +
+                getResources().getString(R.string.meters_abbreviation));
     }
 
     public void setTextViewComment(String text) {
@@ -158,9 +161,7 @@ public class AddExerciseRecordActivity extends AppCompatActivity {
 
     public void updateTime(Calendar dateAndTime) {
         this.time = dateAndTime;
-        textViewTime.setText(DateUtils.formatDateTime(this,
-                dateAndTime.getTimeInMillis(),
-                DateUtils.FORMAT_SHOW_TIME));
+        textViewTime.setText(new SimpleDateFormat("HH:mm:ss").format(dateAndTime.getTime()));
     }
 
     public ExerciseRecordModel getModel() {
@@ -172,10 +173,10 @@ public class AddExerciseRecordActivity extends AppCompatActivity {
             model.setDistance(Float.parseFloat(textViewDistance.getText().toString()
                     .substring(0, textViewDistance.getText().toString().length() - 2)));
         }
-        if(date != null) {
+        if (date != null) {
             model.setDate(date.getTime());
         }
-        if(time != null) {
+        if (time != null) {
             model.setTime(time.getTimeInMillis());
         }
         model.setComment(textViewComment.getText().toString());

@@ -47,7 +47,8 @@ public class GoalsActivity extends AppCompatActivity {
         seekBarSteps.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textViewSteps.setText(presenter.getStepsGoal(progress) + "");
+                textViewSteps.setText(presenter.getStepsGoal(progress) + " " +
+                        getResources().getString(R.string.steps_notify_abbreviation_3));
             }
 
             @Override
@@ -64,7 +65,8 @@ public class GoalsActivity extends AppCompatActivity {
         seekBarWeight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textViewWeight.setText(presenter.getWeightGoal(progress));
+                textViewWeight.setText(presenter.getWeightGoal(progress) + " " +
+                        getResources().getString(R.string.kilogram_abbreviation));
             }
 
             @Override

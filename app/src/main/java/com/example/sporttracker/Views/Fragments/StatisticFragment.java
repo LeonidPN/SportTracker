@@ -310,7 +310,7 @@ public class StatisticFragment extends Fragment {
                 @Override
                 public void onValueSelected(Entry e, Highlight h) {
                     textViewCurrentDate.setText(presenter.getDayInWeek((int) e.getX()));
-                    textViewCurrentDistance.setText(e.getY() + " " + getResources()
+                    textViewCurrentDistance.setText(String.format("%.3f", e.getY()) + " " + getResources()
                             .getString(R.string.kilometers_abbreviation));
                 }
 
@@ -335,19 +335,11 @@ public class StatisticFragment extends Fragment {
 
             chart.invalidate();
 
-            /*ValueFormatter formatter = new ValueFormatter() {
-                @Override
-                public String getAxisLabel(float value, AxisBase axis) {
-                    return presenter.getMonthLabels()[(int) value];
-                }
-            };
-            chart.getXAxis().setValueFormatter(formatter);*/
-
             chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
                 @Override
                 public void onValueSelected(Entry e, Highlight h) {
                     textViewCurrentDate.setText(presenter.getDayInMonth((int) e.getX()));
-                    textViewCurrentDistance.setText(e.getY() + " " + getResources()
+                    textViewCurrentDistance.setText(String.format("%.3f", e.getY()) + " " + getResources()
                             .getString(R.string.kilometers_abbreviation));
                 }
 
@@ -384,7 +376,7 @@ public class StatisticFragment extends Fragment {
                 @Override
                 public void onValueSelected(Entry e, Highlight h) {
                     textViewCurrentDate.setText(presenter.getMonthInYear((int) e.getX()));
-                    textViewCurrentDistance.setText(e.getY() + " " + getResources()
+                    textViewCurrentDistance.setText(String.format("%.3f", e.getY()) + " " + getResources()
                             .getString(R.string.kilometers_abbreviation));
                 }
 
@@ -421,7 +413,7 @@ public class StatisticFragment extends Fragment {
                 @Override
                 public void onValueSelected(Entry e, Highlight h) {
                     textViewCurrentDate.setText(presenter.getYearInAll((int) e.getX()));
-                    textViewCurrentDistance.setText(e.getY() + " " + getResources()
+                    textViewCurrentDistance.setText(String.format("%.3f", e.getY()) + " " + getResources()
                             .getString(R.string.kilometers_abbreviation));
                 }
 

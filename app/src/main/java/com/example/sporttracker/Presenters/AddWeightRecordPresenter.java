@@ -8,7 +8,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TimePicker;
 
 import com.example.sporttracker.Models.WeightRecordModel;
@@ -45,6 +45,7 @@ public class AddWeightRecordPresenter {
     public void viewIsReady() {
         activity.updateDate(date);
         activity.updateTime(date);
+        activity.setTextViewWeight((int) preferences.getWeight());
     }
 
     public void changeDate() {
@@ -81,18 +82,38 @@ public class AddWeightRecordPresenter {
 
     public void changeWeight() {
         LayoutInflater li = LayoutInflater.from(activity.getContext());
-        @SuppressLint("InflateParams") View promptsView = li.inflate(R.layout.edit_text_dialog_number, null);
+        @SuppressLint("InflateParams") View promptsView = li.inflate(R.layout.number_picker_dialog, null);
+
+        final NumberPicker numberPicker = promptsView.findViewById(R.id.numberPicker);
+
+        int minValue = 10;
+        int maxValue = 250;
+
+        final String[] values = new String[maxValue - minValue + 1];
+
+        for (int i = 0; i < values.length; i++) {
+            values[i] = (minValue + i) + " " + getResourceString(R.string.kilogram_abbreviation);
+        }
+
+        numberPicker.setMinValue(minValue);
+        numberPicker.setMaxValue(maxValue);
+
+        numberPicker.setDisplayedValues(values);
+
+        numberPicker.setValue((int) preferences.getWeight());
+
+        numberPicker.setWrapSelectorWheel(true);
 
         AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(activity.getContext());
         mDialogBuilder.setView(promptsView);
-        final EditText userInput = promptsView.findViewById(R.id.editText);
-
+        mDialogBuilder.setTitle(getResourceString(R.string.weight));
+        mDialogBuilder.setCancelable(false);
         mDialogBuilder
                 .setCancelable(false)
                 .setPositiveButton(activity.getResources().getString(R.string.ok),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                activity.setTextViewWeight(userInput.getText().toString());
+                                activity.setTextViewWeight(numberPicker.getValue());
                             }
                         })
                 .setNegativeButton(activity.getResources().getString(R.string.cancel),
@@ -121,5 +142,9 @@ public class AddWeightRecordPresenter {
 
     public void close() {
         activity.finish();
+    }
+
+    private String getResourceString(int id) {
+        return activity.getResources().getString(id);
     }
 }
