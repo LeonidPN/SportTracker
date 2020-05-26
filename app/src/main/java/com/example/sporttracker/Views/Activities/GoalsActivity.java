@@ -83,8 +83,8 @@ public class GoalsActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.save(Integer.parseInt(textViewSteps.getText().toString()),
-                        Integer.parseInt(textViewWeight.getText().toString()));
+                presenter.save(Integer.parseInt(textViewSteps.getText().toString().split(" ")[0]),
+                        Integer.parseInt(textViewWeight.getText().toString().split(" ")[0]));
                 presenter.close();
             }
         });
